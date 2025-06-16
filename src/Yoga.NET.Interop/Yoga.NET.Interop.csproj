@@ -10,6 +10,7 @@
     <OS Condition="$([System.OperatingSystem]::IsLinux())">linux</OS>
     <Arch Condition=" '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64' ">x64</Arch>
     <Arch Condition=" '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'arm64' ">arm64</Arch>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\yoga\yoga\yoga\**\*.h" LinkBase="include" />

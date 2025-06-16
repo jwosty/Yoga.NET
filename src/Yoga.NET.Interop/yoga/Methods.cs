@@ -514,6 +514,45 @@ namespace Yoga.NET.Interop
         [return: NativeTypeName("bool")]
         public static extern byte YGFloatIsUndefined(float value);
 
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga19layoutAbsoluteChildEPKNS0_4NodeES3_PS1_ffNS0_10SizingModeENS0_9DirectionERNS0_10LayoutDataEjj", ExactSpelling = true)]
+        public static extern void layoutAbsoluteChild([NativeTypeName("const yoga::Node *")] Node* containingNode, [NativeTypeName("const yoga::Node *")] Node* node, [NativeTypeName("facebook::yoga::Node *")] Node* child, float containingBlockWidth, float containingBlockHeight, [NativeTypeName("facebook::yoga::SizingMode")] SizingMode widthMode, [NativeTypeName("facebook::yoga::Direction")] Direction direction, [NativeTypeName("facebook::yoga::LayoutData &")] LayoutData* layoutMarkerData, [NativeTypeName("uint32_t")] uint depth, [NativeTypeName("uint32_t")] uint generationCount);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga25layoutAbsoluteDescendantsEPNS0_4NodeES2_NS0_10SizingModeENS0_9DirectionERNS0_10LayoutDataEjjffff", ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern byte layoutAbsoluteDescendants([NativeTypeName("facebook::yoga::Node *")] Node* containingNode, [NativeTypeName("facebook::yoga::Node *")] Node* currentNode, [NativeTypeName("facebook::yoga::SizingMode")] SizingMode widthSizingMode, [NativeTypeName("facebook::yoga::Direction")] Direction currentNodeDirection, [NativeTypeName("facebook::yoga::LayoutData &")] LayoutData* layoutMarkerData, [NativeTypeName("uint32_t")] uint currentDepth, [NativeTypeName("uint32_t")] uint generationCount, float currentNodeMainOffsetFromContainingBlock, float currentNodeCrossOffsetFromContainingBlock, float containingNodeAvailableInnerWidth, float containingNodeAvailableInnerHeight);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga17calculateBaselineEPKNS0_4NodeE", ExactSpelling = true)]
+        public static extern float calculateBaseline([NativeTypeName("const yoga::Node *")] Node* node);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga16isBaselineLayoutEPKNS0_4NodeE", ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern byte isBaselineLayout([NativeTypeName("const yoga::Node *")] Node* node);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga23canUseCachedMeasurementENS0_10SizingModeEfS1_fS1_fS1_fffffPKNS0_6ConfigE", ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern byte canUseCachedMeasurement([NativeTypeName("facebook::yoga::SizingMode")] SizingMode widthMode, float availableWidth, [NativeTypeName("facebook::yoga::SizingMode")] SizingMode heightMode, float availableHeight, [NativeTypeName("facebook::yoga::SizingMode")] SizingMode lastWidthMode, float lastAvailableWidth, [NativeTypeName("facebook::yoga::SizingMode")] SizingMode lastHeightMode, float lastAvailableHeight, float lastComputedWidth, float lastComputedHeight, float marginRow, float marginColumn, [NativeTypeName("const yoga::Config *")] Config* config);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga15calculateLayoutEPNS0_4NodeEffNS0_9DirectionE", ExactSpelling = true)]
+        public static extern void calculateLayout([NativeTypeName("facebook::yoga::Node *")] Node* node, float ownerWidth, float ownerHeight, [NativeTypeName("facebook::yoga::Direction")] Direction ownerDirection);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga23calculateLayoutInternalEPNS0_4NodeEffNS0_9DirectionENS0_10SizingModeES4_ffbNS0_16LayoutPassReasonERNS0_10LayoutDataEjj", ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern byte calculateLayoutInternal([NativeTypeName("facebook::yoga::Node *")] Node* node, float availableWidth, float availableHeight, [NativeTypeName("facebook::yoga::Direction")] Direction ownerDirection, [NativeTypeName("facebook::yoga::SizingMode")] SizingMode widthSizingMode, [NativeTypeName("facebook::yoga::SizingMode")] SizingMode heightSizingMode, float ownerWidth, float ownerHeight, [NativeTypeName("bool")] byte performLayout, [NativeTypeName("facebook::yoga::LayoutPassReason")] LayoutPassReason reason, [NativeTypeName("facebook::yoga::LayoutData &")] LayoutData* layoutMarkerData, [NativeTypeName("uint32_t")] uint depth, [NativeTypeName("uint32_t")] uint generationCount);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga17calculateFlexLineEPNS0_4NodeENS0_9DirectionEffffRNS0_18LayoutableChildrenIS1_E8IteratorEm", ExactSpelling = true)]
+        [return: NativeTypeName("facebook::yoga::FlexLine")]
+        public static extern FlexLine calculateFlexLine([NativeTypeName("facebook::yoga::Node *")] Node* node, [NativeTypeName("facebook::yoga::Direction")] Direction ownerDirection, float ownerWidth, float mainAxisownerSize, float availableInnerWidth, float availableInnerMainDim, [NativeTypeName("facebook::yoga::LayoutableChildren<facebook::yoga::Node>::Iterator &")] Iterator* iterator, [NativeTypeName("size_t")] nuint lineCount);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga21roundValueToPixelGridEddbb", ExactSpelling = true)]
+        public static extern float roundValueToPixelGrid(double value, double pointScaleFactor, [NativeTypeName("bool")] byte forceCeil, [NativeTypeName("bool")] byte forceFloor);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga29roundLayoutResultsToPixelGridEPNS0_4NodeEdd", ExactSpelling = true)]
+        public static extern void roundLayoutResultsToPixelGrid([NativeTypeName("facebook::yoga::Node *")] Node* node, double absoluteLeft, double absoluteTop);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga29configUpdateInvalidatesLayoutERKNS0_6ConfigES3_", ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern byte configUpdateInvalidatesLayout([NativeTypeName("const Config &")] Config* oldConfig, [NativeTypeName("const Config &")] Config* newConfig);
+
         [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga16fatalWithMessageEPKc", ExactSpelling = true)]
         public static extern void fatalWithMessage([NativeTypeName("const char *")] sbyte* message);
 
@@ -525,6 +564,19 @@ namespace Yoga.NET.Interop
 
         [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga21assertFatalWithConfigEPKNS0_6ConfigEbPKc", ExactSpelling = true)]
         public static extern void assertFatalWithConfig([NativeTypeName("const yoga::Config *")] Config* config, [NativeTypeName("bool")] byte condition, [NativeTypeName("const char *")] sbyte* message);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga3logENS0_8LogLevelEPKcz", ExactSpelling = true)]
+        public static extern void log([NativeTypeName("facebook::yoga::LogLevel")] LogLevel level, [NativeTypeName("const char *")] sbyte* format, __arglist);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga3logEPKNS0_4NodeENS0_8LogLevelEPKcz", ExactSpelling = true)]
+        public static extern void log([NativeTypeName("const yoga::Node *")] Node* node, [NativeTypeName("facebook::yoga::LogLevel")] LogLevel level, [NativeTypeName("const char *")] sbyte* format, __arglist);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga3logEPKNS0_6ConfigENS0_8LogLevelEPKcz", ExactSpelling = true)]
+        public static extern void log([NativeTypeName("const yoga::Config *")] Config* config, [NativeTypeName("facebook::yoga::LogLevel")] LogLevel level, [NativeTypeName("const char *")] sbyte* format, __arglist);
+
+        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga16getDefaultLoggerEv", ExactSpelling = true)]
+        [return: NativeTypeName("YGLogger")]
+        public static extern delegate* unmanaged[Cdecl]<YGConfig*, YGNode*, YGLogLevel, sbyte*, sbyte*, int> getDefaultLogger();
 
         [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga24LayoutPassReasonToStringENS0_16LayoutPassReasonE", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
