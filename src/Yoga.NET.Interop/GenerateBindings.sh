@@ -4,8 +4,8 @@ set -e
 SCRIPT_DIR=$(dirname "$0")
 echo "SCRIPT_DIR=${SCRIPT_DIR}"
 
-SDK_PATH=$(xcrun --show-sdk-path)/usr/include
-echo $SDK_PATH
+SDK_PATH=$(xcrun --show-sdk-path)
+echo "$SDK_PATH"
 
 CLANGSHARPPINVOKEGENERATOR_TOOL_VERSDION="20.1.2.1"
 LIBCLANG_RUNTIME_VERSION="20.1.2"
@@ -55,12 +55,16 @@ set +e
 generate_bindings() {
   dotnet ClangSharpPInvokeGenerator \
     --language c++ \
+    --std c++20 \
     --config latest-codegen unix-types generate-helper-types multi-file exclude-funcs-with-body \
     --output "${SCRIPT_DIR}/yoga/" \
     --namespace "Yoga.NET.Interop" \
-    --include-directory "${SDK_PATH}" \
+    --include-directory "${SDK_PATH}/usr/include/c++/v1" \
+    --include-directory "${SDK_PATH}/usr/include" \
+    --include-directory "${SDK_PATH}/System/Library/Frameworks/Kernel.framework/Versions/A/Headers/" \
     --include-directory "${HEADERS_DIR}" \
     "$@";
+#    --include-directory "/Applications/Xcode.app/Contents/Developer//Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/" \
 }
 
 generate_bindings \
