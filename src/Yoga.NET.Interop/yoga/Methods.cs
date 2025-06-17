@@ -508,7 +508,7 @@ namespace Yoga.NET.Interop
         public static extern float YGRoundValueToPixelGrid(double value, double pointScaleFactor, [NativeTypeName("bool")] byte forceCeil, [NativeTypeName("bool")] byte forceFloor);
 
         [NativeTypeName("const float")]
-        public const float YGUndefined = NaN;
+        public const float YGUndefined = Single.NaN;
 
         [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]

@@ -46,17 +46,17 @@ if [ ! -f "${LIBCLANGSHARP_LINK_TARGET}" ]; then
   cp "${LIBCLANGSHARP_LOCATION}" "${LIBCLANGSHARP_LINK_TARGET}"
 fi
 
-rm -f "$SCRIPT_DIR"/jack/*.cs
+rm -f "${SCRIPT_DIR}/yoga/*.cs"
 
 #export LD_DEBUG=libs
 
-set +e
+set +e;
 
 generate_bindings() {
   dotnet ClangSharpPInvokeGenerator \
     --language c++ \
     --std c++20 \
-    --config latest-codegen unix-types generate-helper-types multi-file exclude-funcs-with-body generate-cpp-attributes \
+    --config latest-codegen unix-types generate-helper-types multi-file exclude-funcs-with-body \
     --output "${OUTPUT_DIR}" \
     --namespace "Yoga.NET.Interop" \
     --additional "-isysroot" "${SDK_PATH}" \
@@ -70,6 +70,7 @@ generate_bindings() {
 
 echo "Generating bindings..."
 
+#  --file "${SDK_PATH}/usr/include/c++/v1/array" \
 generate_bindings \
   --file-directory "${HEADERS_DIR}" \
   --libraryPath "libyoga.dylib" \
@@ -127,10 +128,8 @@ generate_bindings \
   --file "yoga/style/Style.h" \
   --file "yoga/style/StyleLength.h" \
   --file "yoga/style/StyleValueHandle.h" \
-  --file "yoga/style/StyleValuePool.h" \;
+  --file "yoga/style/StyleValuePool.h";
 
 set -e
-
-echo "Performing fixups..."
 
 dotnet fsi "${SCRIPT_DIR}/FixupBindings.fsx" "${SCRIPT_DIR}/yoga/"
