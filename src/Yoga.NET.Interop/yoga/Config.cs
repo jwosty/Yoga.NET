@@ -31,7 +31,7 @@ namespace Yoga.NET.Interop
         private uint version_;
 
         [NativeTypeName("facebook::yoga::ExperimentalFeatureSet")]
-        private bitset<1> experimentalFeatures_;
+        private byte experimentalFeatures_;
 
         [NativeTypeName("facebook::yoga::Errata")]
         private Errata errata_;
@@ -56,7 +56,7 @@ namespace Yoga.NET.Interop
 
         [DllImport("libyoga.dylib", CallingConvention = CallingConvention.ThisCall, EntryPoint = "__ZNK8facebook4yoga6Config21getEnabledExperimentsEv", ExactSpelling = true)]
         [return: NativeTypeName("facebook::yoga::ExperimentalFeatureSet")]
-        public static extern bitset<1> getEnabledExperiments(Config* pThis);
+        public static extern byte getEnabledExperiments(Config* pThis);
 
         [DllImport("libyoga.dylib", CallingConvention = CallingConvention.ThisCall, EntryPoint = "__ZN8facebook4yoga6Config9setErrataENS0_6ErrataE", ExactSpelling = true)]
         public static extern void setErrata(Config* pThis, [NativeTypeName("facebook::yoga::Errata")] Errata errata);

@@ -64,7 +64,6 @@ generate_bindings() {
     --additional "-isystem" "${SDK_PATH}/usr/include/c++/v1" \
     --additional "-isystem" "${LLVM_PATH}/lib/clang/20/include/" \
     --additional "-isystem" "${SDK_PATH}/usr/include" \
-    --exclude "LayoutData::measureCallbackReasonsCount" \
     --include-directory "${HEADERS_DIR}" \
     "$@";
 }

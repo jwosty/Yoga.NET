@@ -14,8 +14,7 @@ type Ctx = { mutable lastEnumType: string }
 type Fixup = Regex * (Match * Ctx -> string)
 
 let fixups: Fixup list = [
-    Regex("public enum \w+ : (?<type>\w+)|((?<a>\w+ = )(?<b>YG\w+,))+"),
-    (fun (m, ctx) ->
+    Regex("public enum \w+ : (?<type>\w+)|((?<a>\w+ = )(?<b>YG\w+,))+"), (fun (m, ctx) ->
         let _t = m.Groups["type"].Value
         if not (String.IsNullOrEmpty _t) then
             ctx.lastEnumType <- _t
@@ -25,8 +24,11 @@ let fixups: Fixup list = [
     )
     Regex("(?<=\d)'"), (fun (_, _) -> "")
     Regex("NaN"), (fun (_, _) -> "Single.NaN")
-    Regex("(private|public) array<(?<type>\w+),\s*(?<size>\d+)>"),
-    (fun (m, _) -> sprintf "InlineArray%s<%s>" (m.Groups["size"].Value) (m.Groups["type"].Value))
+    Regex("(private|public) array<(?<type>\w+),\s*(?<size>\d+)>"), (fun (m, _) ->
+        sprintf "InlineArray%s<%s>" m.Groups["size"].Value m.Groups["type"].Value)
+    Regex("""array<int, unchecked\(\(byte\)\(COUNT\)\)>"""), (fun (_, _) -> "InlineArray8<byte>")
+    Regex("SmallValueBuffer<(?<size>\d+)>"), (fun (m, _) -> sprintf "SmallValueBuffer%s" m.Groups["size"].Value)
+    Regex("bitset<1>"), (fun (_, _) -> "byte")
 ]
 
 for filePath in Directory.EnumerateFiles processingDir do
