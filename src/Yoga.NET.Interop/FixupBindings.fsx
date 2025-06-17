@@ -13,7 +13,7 @@ printfn "Performing fixups..."
 type Ctx = { mutable lastEnumType: string }
 type Fixup = Regex * (Match * Ctx -> string)
 
-let enumFixup : Fixup =
+let fixups: Fixup list = [
     Regex("public enum \w+ : (?<type>\w+)|((?<a>\w+ = )(?<b>YG\w+,))+"),
     (fun (m, ctx) ->
         let _t = m.Groups["type"].Value
@@ -23,11 +23,11 @@ let enumFixup : Fixup =
         else
             m.Groups["a"].Value + $"(%s{ctx.lastEnumType})" + m.Groups["b"].Value
     )
-let numberFixup : Fixup = Regex("(?<=\d)'"), (fun (_, _) -> "")
-let nanFixup : Fixup = Regex("NaN"), (fun (_, _) -> "Single.NaN")
-let arrayFixup : Fixup =
+    Regex("(?<=\d)'"), (fun (_, _) -> "")
+    Regex("NaN"), (fun (_, _) -> "Single.NaN")
     Regex("(private|public) array<(?<type>\w+),\s*(?<size>\d+)>"),
     (fun (m, _) -> sprintf "InlineArray%s<%s>" (m.Groups["size"].Value) (m.Groups["type"].Value))
+]
 
 for filePath in Directory.EnumerateFiles processingDir do
     printf "Fixing '%s'..." filePath
@@ -40,7 +40,7 @@ for filePath in Directory.EnumerateFiles processingDir do
             if text' <> text then
                 count <- count + 1
             text'))
-    let text = text |> runFixup enumFixup |> runFixup numberFixup |> runFixup nanFixup |> runFixup arrayFixup
+    let text = List.fold (fun text fixup -> runFixup fixup text) text fixups
     if count = 0 then
         printfn $" \u001b[90mNo replacements needed.\u001b[0m"
     else
