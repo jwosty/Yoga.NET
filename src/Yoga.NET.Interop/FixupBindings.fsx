@@ -10,31 +10,37 @@ let processingDir =
 
 printfn "Performing fixups..."
 
-let enumFixupReg = Regex("public enum \w+ : (?<type>\w+)|((?<a>\w+ = )(?<b>YG\w+,))+")
-let numberFixupReg = Regex("(?<=\d)'")
-let nanFixup = Regex("NaN")
-let arrayFixup = Regex("(private|public) array<(?<type>\w+),\s*(?<size>\d+)>")
+type Ctx = { mutable lastEnumType: string }
+type Fixup = Regex * (Match * Ctx -> string)
+
+let enumFixup : Fixup =
+    Regex("public enum \w+ : (?<type>\w+)|((?<a>\w+ = )(?<b>YG\w+,))+"),
+    (fun (m, ctx) ->
+        let _t = m.Groups["type"].Value
+        if not (String.IsNullOrEmpty _t) then
+            ctx.lastEnumType <- _t
+            m.Value
+        else
+            m.Groups["a"].Value + $"(%s{ctx.lastEnumType})" + m.Groups["b"].Value
+    )
+let numberFixup : Fixup = Regex("(?<=\d)'"), (fun (_, _) -> "")
+let nanFixup : Fixup = Regex("NaN"), (fun (_, _) -> "Single.NaN")
+let arrayFixup : Fixup =
+    Regex("(private|public) array<(?<type>\w+),\s*(?<size>\d+)>"),
+    (fun (m, _) -> sprintf "InlineArray%s<%s>" (m.Groups["size"].Value) (m.Groups["type"].Value))
+
 for filePath in Directory.EnumerateFiles processingDir do
     printf "Fixing '%s'..." filePath
     let text = File.ReadAllText filePath
     let mutable count = 0
-    let mutable t = "missing_type"
-    let text =
-        enumFixupReg.Replace (text, MatchEvaluator(fun m ->
-            let _t = m.Groups["type"].Value
-            if not (String.IsNullOrEmpty _t) then
-                t <- _t
-                m.Value
-            else
+    let mutable ctx = { lastEnumType = "missing_type" }
+    let runFixup (fixup: Fixup) text =
+        (fst fixup).Replace (text, MatchEvaluator(fun m ->
+            let text' = (snd fixup) (m, ctx)
+            if text' <> text then
                 count <- count + 1
-                m.Groups["a"].Value + $"(%s{t})" + m.Groups["b"].Value))
-    let text =
-        numberFixupReg.Replace (text, MatchEvaluator(fun m -> count <- count + 1; ""))
-    let text = nanFixup.Replace (text, MatchEvaluator(fun m -> count <- count + 1; "Single.NaN"))
-    let text =
-        arrayFixup.Replace (text, MatchEvaluator(fun m ->
-            count <- count + 1
-            sprintf "InlineArray%s<%s>" (m.Groups["size"].Value) (m.Groups["type"].Value)))
+            text'))
+    let text = text |> runFixup enumFixup |> runFixup numberFixup |> runFixup nanFixup |> runFixup arrayFixup
     if count = 0 then
         printfn $" \u001b[90mNo replacements needed.\u001b[0m"
     else
