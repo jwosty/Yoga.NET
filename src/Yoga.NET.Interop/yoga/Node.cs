@@ -123,7 +123,7 @@ namespace Yoga.NET.Interop
         private Config* config_;
 
         [NativeTypeName("array<Style::Length, 2>")]
-        private array<StyleLength, 2> processedDimensions_;
+        InlineArray2<StyleLength> processedDimensions_;
 
         [DllImport("libyoga.dylib", CallingConvention = CallingConvention.ThisCall, EntryPoint = "__ZN8facebook4yoga4NodeC1Ev", ExactSpelling = true)]
         public static extern Node(Node* pThis);

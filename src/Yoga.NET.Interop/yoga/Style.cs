@@ -177,28 +177,28 @@ namespace Yoga.NET.Interop
         private StyleValueHandle flexBasis_;
 
         [NativeTypeName("facebook::yoga::Style::Edges")]
-        private array<StyleValueHandle, 9> margin_;
+        InlineArray9<StyleValueHandle> margin_;
 
         [NativeTypeName("facebook::yoga::Style::Edges")]
-        private array<StyleValueHandle, 9> position_;
+        InlineArray9<StyleValueHandle> position_;
 
         [NativeTypeName("facebook::yoga::Style::Edges")]
-        private array<StyleValueHandle, 9> padding_;
+        InlineArray9<StyleValueHandle> padding_;
 
         [NativeTypeName("facebook::yoga::Style::Edges")]
-        private array<StyleValueHandle, 9> border_;
+        InlineArray9<StyleValueHandle> border_;
 
         [NativeTypeName("facebook::yoga::Style::Gutters")]
-        private array<StyleValueHandle, 3> gap_;
+        InlineArray3<StyleValueHandle> gap_;
 
         [NativeTypeName("facebook::yoga::Style::Dimensions")]
-        private array<StyleValueHandle, 2> dimensions_;
+        InlineArray2<StyleValueHandle> dimensions_;
 
         [NativeTypeName("facebook::yoga::Style::Dimensions")]
-        private array<StyleValueHandle, 2> minDimensions_;
+        InlineArray2<StyleValueHandle> minDimensions_;
 
         [NativeTypeName("facebook::yoga::Style::Dimensions")]
-        private array<StyleValueHandle, 2> maxDimensions_;
+        InlineArray2<StyleValueHandle> maxDimensions_;
 
         [NativeTypeName("facebook::yoga::StyleValueHandle")]
         private StyleValueHandle aspectRatio_;

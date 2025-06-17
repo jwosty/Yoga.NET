@@ -70,7 +70,6 @@ generate_bindings() {
 
 echo "Generating bindings..."
 
-#  --file "${SDK_PATH}/usr/include/c++/v1/array" \
 generate_bindings \
   --file-directory "${HEADERS_DIR}" \
   --libraryPath "libyoga.dylib" \

@@ -59,22 +59,22 @@ namespace Yoga.NET.Interop
         }
 
         [NativeTypeName("std::array<float, 2>")]
-        private array<float, 2> dimensions_;
+        InlineArray2<float> dimensions_;
 
         [NativeTypeName("std::array<float, 2>")]
-        private array<float, 2> measuredDimensions_;
+        InlineArray2<float> measuredDimensions_;
 
         [NativeTypeName("std::array<float, 4>")]
-        private array<float, 4> position_;
+        InlineArray4<float> position_;
 
         [NativeTypeName("std::array<float, 4>")]
-        private array<float, 4> margin_;
+        InlineArray4<float> margin_;
 
         [NativeTypeName("std::array<float, 4>")]
-        private array<float, 4> border_;
+        InlineArray4<float> border_;
 
         [NativeTypeName("std::array<float, 4>")]
-        private array<float, 4> padding_;
+        InlineArray4<float> padding_;
 
         [DllImport("libyoga.dylib", CallingConvention = CallingConvention.ThisCall, EntryPoint = "__ZNK8facebook4yoga13LayoutResultseqES1_", ExactSpelling = true)]
         [return: NativeTypeName("bool")]

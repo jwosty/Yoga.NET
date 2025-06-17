@@ -13,6 +13,7 @@ printfn "Performing fixups..."
 let enumFixupReg = Regex("public enum \w+ : (?<type>\w+)|((?<a>\w+ = )(?<b>YG\w+,))+")
 let numberFixupReg = Regex("(?<=\d)'")
 let nanFixup = Regex("NaN")
+let arrayFixup = Regex("(private|public) array<(?<type>\w+),\s*(?<size>\d+)>")
 for filePath in Directory.EnumerateFiles processingDir do
     printf "Fixing '%s'..." filePath
     let text = File.ReadAllText filePath
@@ -30,6 +31,10 @@ for filePath in Directory.EnumerateFiles processingDir do
     let text =
         numberFixupReg.Replace (text, MatchEvaluator(fun m -> count <- count + 1; ""))
     let text = nanFixup.Replace (text, MatchEvaluator(fun m -> count <- count + 1; "Single.NaN"))
+    let text =
+        arrayFixup.Replace (text, MatchEvaluator(fun m ->
+            count <- count + 1
+            sprintf "InlineArray%s<%s>" (m.Groups["size"].Value) (m.Groups["type"].Value)))
     if count = 0 then
         printfn $" \u001b[90mNo replacements needed.\u001b[0m"
     else
