@@ -8,6 +8,5 @@ include(${YOGA_ROOT}/cmake/project-defaults.cmake)
 
 add_subdirectory(${YOGA_ROOT})
 
-add_library(yoga-native SHARED library.cpp)
-
-target_link_libraries(yoga-native PRIVATE "$<LINK_LIBRARY:WHOLE_ARCHIVE,yogacore>")
+add_library(yoga SHARED library.cpp)
+target_link_libraries(yoga PRIVATE "$<LINK_LIBRARY:WHOLE_ARCHIVE,yogacore>")
