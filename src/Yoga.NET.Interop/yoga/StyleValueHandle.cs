@@ -9,13 +9,13 @@ namespace Yoga.NET.Interop
         private ushort repr_;
 
         [NativeTypeName("const uint16_t")]
-        private const ushort kHandleTypeMask = 0b0000'0000'0000'0111;
+        private const ushort kHandleTypeMask = 0b0000000000000111;
 
         [NativeTypeName("const uint16_t")]
-        private const ushort kHandleIndexedMask = 0b0000'0000'0000'1000;
+        private const ushort kHandleIndexedMask = 0b0000000000001000;
 
         [NativeTypeName("const uint16_t")]
-        private const ushort kHandleValueMask = 0b1111'1111'1111'0000;
+        private const ushort kHandleValueMask = 0b1111111111110000;
 
         [NativeTypeName("uint8_t")]
         private enum Type : byte
