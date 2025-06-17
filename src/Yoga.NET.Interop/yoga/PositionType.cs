@@ -5,8 +5,8 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint8_t")]
     public enum PositionType : byte
     {
-        Static = YGPositionTypeStatic,
-        Relative = YGPositionTypeRelative,
-        Absolute = YGPositionTypeAbsolute,
+        Static = (byte)YGPositionTypeStatic,
+        Relative = (byte)YGPositionTypeRelative,
+        Absolute = (byte)YGPositionTypeAbsolute,
     }
 }

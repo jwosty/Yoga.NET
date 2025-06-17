@@ -5,8 +5,8 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint8_t")]
     public enum Overflow : byte
     {
-        Visible = YGOverflowVisible,
-        Hidden = YGOverflowHidden,
-        Scroll = YGOverflowScroll,
+        Visible = (byte)YGOverflowVisible,
+        Hidden = (byte)YGOverflowHidden,
+        Scroll = (byte)YGOverflowScroll,
     }
 }

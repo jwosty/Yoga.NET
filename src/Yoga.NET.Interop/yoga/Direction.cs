@@ -5,8 +5,8 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint8_t")]
     public enum Direction : byte
     {
-        Inherit = YGDirectionInherit,
-        LTR = YGDirectionLTR,
-        RTL = YGDirectionRTL,
+        Inherit = (byte)YGDirectionInherit,
+        LTR = (byte)YGDirectionLTR,
+        RTL = (byte)YGDirectionRTL,
     }
 }

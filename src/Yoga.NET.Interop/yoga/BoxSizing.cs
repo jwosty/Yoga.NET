@@ -5,7 +5,7 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint8_t")]
     public enum BoxSizing : byte
     {
-        BorderBox = YGBoxSizingBorderBox,
-        ContentBox = YGBoxSizingContentBox,
+        BorderBox = (byte)YGBoxSizingBorderBox,
+        ContentBox = (byte)YGBoxSizingContentBox,
     }
 }

@@ -5,7 +5,7 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint8_t")]
     public enum Dimension : byte
     {
-        Width = YGDimensionWidth,
-        Height = YGDimensionHeight,
+        Width = (byte)YGDimensionWidth,
+        Height = (byte)YGDimensionHeight,
     }
 }

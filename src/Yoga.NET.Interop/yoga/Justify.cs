@@ -5,11 +5,11 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint8_t")]
     public enum Justify : byte
     {
-        FlexStart = YGJustifyFlexStart,
-        Center = YGJustifyCenter,
-        FlexEnd = YGJustifyFlexEnd,
-        SpaceBetween = YGJustifySpaceBetween,
-        SpaceAround = YGJustifySpaceAround,
-        SpaceEvenly = YGJustifySpaceEvenly,
+        FlexStart = (byte)YGJustifyFlexStart,
+        Center = (byte)YGJustifyCenter,
+        FlexEnd = (byte)YGJustifyFlexEnd,
+        SpaceBetween = (byte)YGJustifySpaceBetween,
+        SpaceAround = (byte)YGJustifySpaceAround,
+        SpaceEvenly = (byte)YGJustifySpaceEvenly,
     }
 }

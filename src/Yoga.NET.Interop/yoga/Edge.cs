@@ -5,14 +5,14 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint8_t")]
     public enum Edge : byte
     {
-        Left = YGEdgeLeft,
-        Top = YGEdgeTop,
-        Right = YGEdgeRight,
-        Bottom = YGEdgeBottom,
-        Start = YGEdgeStart,
-        End = YGEdgeEnd,
-        Horizontal = YGEdgeHorizontal,
-        Vertical = YGEdgeVertical,
-        All = YGEdgeAll,
+        Left = (byte)YGEdgeLeft,
+        Top = (byte)YGEdgeTop,
+        Right = (byte)YGEdgeRight,
+        Bottom = (byte)YGEdgeBottom,
+        Start = (byte)YGEdgeStart,
+        End = (byte)YGEdgeEnd,
+        Horizontal = (byte)YGEdgeHorizontal,
+        Vertical = (byte)YGEdgeVertical,
+        All = (byte)YGEdgeAll,
     }
 }

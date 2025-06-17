@@ -5,8 +5,8 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint8_t")]
     public enum Display : byte
     {
-        Flex = YGDisplayFlex,
-        None = YGDisplayNone,
-        Contents = YGDisplayContents,
+        Flex = (byte)YGDisplayFlex,
+        None = (byte)YGDisplayNone,
+        Contents = (byte)YGDisplayContents,
     }
 }

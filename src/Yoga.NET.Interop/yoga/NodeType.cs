@@ -5,7 +5,7 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint8_t")]
     public enum NodeType : byte
     {
-        Default = YGNodeTypeDefault,
-        Text = YGNodeTypeText,
+        Default = (byte)YGNodeTypeDefault,
+        Text = (byte)YGNodeTypeText,
     }
 }

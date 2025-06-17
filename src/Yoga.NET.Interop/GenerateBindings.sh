@@ -4,6 +4,8 @@ set -e
 SCRIPT_DIR=$(dirname "$0")
 echo "SCRIPT_DIR=${SCRIPT_DIR}"
 
+OUTPUT_DIR="${SCRIPT_DIR}/yoga/"
+
 SDK_PATH=$(xcrun --show-sdk-path)
 echo "SDK_PATH: ${SDK_PATH}"
 LLVM_PATH="$HOMEBREW_PREFIX/Cellar/llvm/20.1.7"
@@ -28,8 +30,6 @@ LIBCLANG_LOCATION="${NUGET_PACKAGES_DIR}/libclang.runtime.${PACKAGE_ARCH}/${LIBC
 LIBCLANG_DIR=$(dirname "${LIBCLANG_LOCATION}")
 LIBCLANG_LINK_TARGET="${NUGET_PACKAGES_DIR}/clangsharppinvokegenerator/${CLANGSHARPPINVOKEGENERATOR_TOOL_VERSDION}/tools/net8.0/any/${LIBCLANG_NAME}"
 
-echo C
-
 LIBCLANGSHARP_LOCATION="${NUGET_PACKAGES_DIR}/libclangsharp.runtime.${PACKAGE_ARCH}/${LIBCLANGSHARP_RUNTIME_VERSION}/runtimes/${PACKAGE_ARCH}/native/${LIBCLANGSHARP_NAME}"
 LIBCLANGSHARP_DIR=$(dirname "${LIBCLANGSHARP_LOCATION}")
 LIBCLANGSHARP_LINK_TARGET="${NUGET_PACKAGES_DIR}/clangsharppinvokegenerator/${CLANGSHARPPINVOKEGENERATOR_TOOL_VERSDION}/tools/net8.0/any/${LIBCLANGSHARP_TARGET_NAME}"
@@ -50,18 +50,15 @@ rm -f "$SCRIPT_DIR"/jack/*.cs
 
 #export LD_DEBUG=libs
 
-# TODO: consider making an actual opaque struct type to use for sigset_t and pthread_attr_t instead of just void*=
-
 set +e
 
 generate_bindings() {
   dotnet ClangSharpPInvokeGenerator \
     --language c++ \
     --std c++20 \
-    --config latest-codegen unix-types generate-helper-types multi-file exclude-funcs-with-body \
-    --output "${SCRIPT_DIR}/yoga/" \
+    --config latest-codegen unix-types generate-helper-types multi-file exclude-funcs-with-body generate-cpp-attributes \
+    --output "${OUTPUT_DIR}" \
     --namespace "Yoga.NET.Interop" \
-    --additional "-fno-modules" \
     --additional "-isysroot" "${SDK_PATH}" \
     --additional "-stdlib=libc++" \
     --additional "-isystem" "${SDK_PATH}/usr/include/c++/v1" \
@@ -70,6 +67,8 @@ generate_bindings() {
     --include-directory "${HEADERS_DIR}" \
     "$@";
 }
+
+echo "Generating bindings..."
 
 generate_bindings \
   --file-directory "${HEADERS_DIR}" \
@@ -130,3 +129,8 @@ generate_bindings \
   --file "yoga/style/StyleValueHandle.h" \
   --file "yoga/style/StyleValuePool.h" \;
 
+set -e
+
+echo "Performing fixups..."
+
+dotnet fsi "${SCRIPT_DIR}/FixupBindings.fsx" "${SCRIPT_DIR}/yoga/"

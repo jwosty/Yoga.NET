@@ -5,11 +5,11 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint32_t")]
     public enum Errata : uint
     {
-        None = YGErrataNone,
-        StretchFlexBasis = YGErrataStretchFlexBasis,
-        AbsolutePositionWithoutInsetsExcludesPadding = YGErrataAbsolutePositionWithoutInsetsExcludesPadding,
-        AbsolutePercentAgainstInnerSize = YGErrataAbsolutePercentAgainstInnerSize,
-        All = YGErrataAll,
-        Classic = YGErrataClassic,
+        None = (uint)YGErrataNone,
+        StretchFlexBasis = (uint)YGErrataStretchFlexBasis,
+        AbsolutePositionWithoutInsetsExcludesPadding = (uint)YGErrataAbsolutePositionWithoutInsetsExcludesPadding,
+        AbsolutePercentAgainstInnerSize = (uint)YGErrataAbsolutePercentAgainstInnerSize,
+        All = (uint)YGErrataAll,
+        Classic = (uint)YGErrataClassic,
     }
 }

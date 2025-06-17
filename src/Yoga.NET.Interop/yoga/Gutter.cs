@@ -5,8 +5,8 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint8_t")]
     public enum Gutter : byte
     {
-        Column = YGGutterColumn,
-        Row = YGGutterRow,
-        All = YGGutterAll,
+        Column = (byte)YGGutterColumn,
+        Row = (byte)YGGutterRow,
+        All = (byte)YGGutterAll,
     }
 }

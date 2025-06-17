@@ -5,8 +5,8 @@ namespace Yoga.NET.Interop
     [NativeTypeName("uint8_t")]
     public enum MeasureMode : byte
     {
-        Undefined = YGMeasureModeUndefined,
-        Exactly = YGMeasureModeExactly,
-        AtMost = YGMeasureModeAtMost,
+        Undefined = (byte)YGMeasureModeUndefined,
+        Exactly = (byte)YGMeasureModeExactly,
+        AtMost = (byte)YGMeasureModeAtMost,
     }
 }
