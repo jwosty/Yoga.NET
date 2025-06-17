@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>x86;x64;arm64</Platforms>
+    <OS Condition="$([System.OperatingSystem]::IsWindows())">win</OS>
+    <OS Condition="$([System.OperatingSystem]::IsMacOS())">osx</OS>
+    <OS Condition="$([System.OperatingSystem]::IsLinux())">linux</OS>
+    <Arch Condition=" '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64' ">x64</Arch>
+    <Arch Condition=" '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'arm64' ">arm64</Arch>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\yoga\yoga\yoga\**\*.h" LinkBase="include" />
+    <None Remove="Native\jackdotnet.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="libclang" Version="20.1.2" />
+    <!-- Runtime package should be automatically included by the libclang/libclangsharp meta-packages, but for some
+    reason, on my mac, it's not, so just do it manually -->
+    <PackageReference Include="libclang.runtime.$(OS)-$(Arch)" Version="20.1.2" />
+    <PackageReference Include="libClangSharp" Version="20.1.2" />
+    <PackageReference Include="libClangSharp.runtime.$(OS)-$(Arch)" Version="20.1.2" />
+  </ItemGroup>
+</Project>
