@@ -5,6 +5,7 @@ SCRIPT_DIR=$(dirname "$0")
 echo "SCRIPT_DIR=${SCRIPT_DIR}"
 
 OUTPUT_DIR="${SCRIPT_DIR}/yoga"
+TEST_OUTPUT_DIR="${SCRIPT_DIR}/../../tests/Yoga.NET.Tests/Interop/Generated"
 
 SDK_PATH=$(xcrun --show-sdk-path)
 echo "SDK_PATH: ${SDK_PATH}"
@@ -47,6 +48,7 @@ if [ ! -f "${LIBCLANGSHARP_LINK_TARGET}" ]; then
 fi
 
 rm -f "${OUTPUT_DIR}"/*.cs
+rm -f "${TEST_OUTPUT_DIR}"/*.cs
 
 #export LD_DEBUG=libs
 
@@ -56,8 +58,9 @@ generate_bindings() {
   dotnet ClangSharpPInvokeGenerator \
     --language c++ \
     --std c++20 \
-    --config latest-codegen unix-types generate-helper-types multi-file exclude-funcs-with-body generate-native-bitfield-attribute \
+    --config latest-codegen unix-types generate-helper-types multi-file exclude-funcs-with-body generate-native-bitfield-attribute generate-tests-xunit \
     --output "${OUTPUT_DIR}" \
+    --test-output "${TEST_OUTPUT_DIR}" \
     --namespace "Yoga.NET.Interop" \
     --additional "-isysroot" "${SDK_PATH}" \
     --additional "-stdlib=libc++" \
@@ -136,4 +139,5 @@ generate_bindings \
 
 set -e
 
-dotnet fsi "${SCRIPT_DIR}/FixupBindings.fsx" "${SCRIPT_DIR}/yoga/"
+dotnet fsi "${SCRIPT_DIR}"/FixupBindings.fsx "${OUTPUT_DIR}"
+dotnet fsi "${SCRIPT_DIR}"/FixupTests.fsx "${TEST_OUTPUT_DIR}"

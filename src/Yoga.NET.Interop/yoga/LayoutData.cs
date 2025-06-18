@@ -16,6 +16,6 @@ namespace Yoga.NET.Interop
         public int measureCallbacks;
 
         [NativeTypeName("array<int, static_cast<uint8_t>(LayoutPassReason::COUNT)>")]
-        public InlineArray8<byte> measureCallbackReasonsCount;
+        public InlineArray8<int> measureCallbackReasonsCount;
     }
 }

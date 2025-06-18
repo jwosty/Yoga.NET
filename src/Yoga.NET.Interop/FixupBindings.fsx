@@ -26,7 +26,7 @@ let fixups: Fixup list = [
     Regex("NaN"), (fun (_, _) -> "Single.NaN")
     Regex("(private|public) array<(?<type>\w+),\s*(?<size>\d+)>"), (fun (m, _) ->
         sprintf "InlineArray%s<%s>" m.Groups["size"].Value m.Groups["type"].Value)
-    Regex("""array<int, unchecked\(\(byte\)\(COUNT\)\)>"""), (fun (_, _) -> "InlineArray8<byte>")
+    Regex("""array<int, unchecked\(\(byte\)\(COUNT\)\)>"""), (fun (_, _) -> "InlineArray8<int>")
     Regex("""array<CachedMeasurement, MaxCachedMeasurements>"""), (fun (m, _) -> "InlineArray8<CachedMeasurement>")
     Regex("""vector<(?<type>\w+)>"""), (fun (m, _) -> sprintf "CppVector<%s>" m.Groups["type"].Value)
     Regex("SmallValueBuffer<(?<size>\d+)>"), (fun (m, _) -> sprintf "SmallValueBuffer%s" m.Groups["size"].Value)
