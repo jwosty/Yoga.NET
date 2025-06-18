@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -11,6 +10,7 @@
     <Arch Condition=" '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64' ">x64</Arch>
     <Arch Condition=" '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'arm64' ">arm64</Arch>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>CS0169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\yoga\yoga\yoga\**\*.h" LinkBase="include" />

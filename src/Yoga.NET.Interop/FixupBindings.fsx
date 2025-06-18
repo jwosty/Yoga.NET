@@ -27,10 +27,13 @@ let fixups: Fixup list = [
     Regex("(private|public) array<(?<type>\w+),\s*(?<size>\d+)>"), (fun (m, _) ->
         sprintf "InlineArray%s<%s>" m.Groups["size"].Value m.Groups["type"].Value)
     Regex("""array<int, unchecked\(\(byte\)\(COUNT\)\)>"""), (fun (_, _) -> "InlineArray8<byte>")
+    Regex("""array<CachedMeasurement, MaxCachedMeasurements>"""), (fun (m, _) -> "InlineArray8<CachedMeasurement>")
+    Regex("""vector<(?<type>\w+)>"""), (fun (m, _) -> sprintf "CppVector<%s>" m.Groups["type"].Value)
     Regex("SmallValueBuffer<(?<size>\d+)>"), (fun (m, _) -> sprintf "SmallValueBuffer%s" m.Groups["size"].Value)
     Regex("bitset<1>"), (fun (_, _) -> "byte")
     Regex("""(?<=public unsafe partial struct Node.*)public bool _bitfield""", RegexOptions.Singleline), (fun (_, _) ->
         "public byte _bitfield")
+    Regex("public partial struct LayoutResults"), (fun (_, _) -> "public unsafe partial struct LayoutResults")
 ]
 
 for filePath in Directory.EnumerateFiles processingDir do

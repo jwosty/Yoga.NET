@@ -5,7 +5,7 @@ namespace Yoga.NET.Interop
     public partial struct FlexLine
     {
         [NativeTypeName("const std::vector<yoga::Node *>")]
-        public vector<IntPtr> itemsInFlow;
+        public CppVector<IntPtr> itemsInFlow;
 
         [NativeTypeName("const float")]
         public float sizeConsumed;

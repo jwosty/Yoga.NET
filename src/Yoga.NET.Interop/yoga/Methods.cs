@@ -539,10 +539,6 @@ namespace Yoga.NET.Interop
         [return: NativeTypeName("bool")]
         public static extern byte calculateLayoutInternal([NativeTypeName("facebook::yoga::Node *")] Node* node, float availableWidth, float availableHeight, [NativeTypeName("facebook::yoga::Direction")] Direction ownerDirection, [NativeTypeName("facebook::yoga::SizingMode")] SizingMode widthSizingMode, [NativeTypeName("facebook::yoga::SizingMode")] SizingMode heightSizingMode, float ownerWidth, float ownerHeight, [NativeTypeName("bool")] byte performLayout, [NativeTypeName("facebook::yoga::LayoutPassReason")] LayoutPassReason reason, [NativeTypeName("facebook::yoga::LayoutData &")] LayoutData* layoutMarkerData, [NativeTypeName("uint32_t")] uint depth, [NativeTypeName("uint32_t")] uint generationCount);
 
-        [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga17calculateFlexLineEPNS0_4NodeENS0_9DirectionEffffRNS0_18LayoutableChildrenIS1_E8IteratorEm", ExactSpelling = true)]
-        [return: NativeTypeName("facebook::yoga::FlexLine")]
-        public static extern FlexLine calculateFlexLine([NativeTypeName("facebook::yoga::Node *")] Node* node, [NativeTypeName("facebook::yoga::Direction")] Direction ownerDirection, float ownerWidth, float mainAxisownerSize, float availableInnerWidth, float availableInnerMainDim, [NativeTypeName("facebook::yoga::LayoutableChildren<facebook::yoga::Node>::Iterator &")] Iterator* iterator, [NativeTypeName("size_t")] nuint lineCount);
-
         [DllImport("libyoga.dylib", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga21roundValueToPixelGridEddbb", ExactSpelling = true)]
         public static extern float roundValueToPixelGrid(double value, double pointScaleFactor, [NativeTypeName("bool")] byte forceCeil, [NativeTypeName("bool")] byte forceFloor);
 

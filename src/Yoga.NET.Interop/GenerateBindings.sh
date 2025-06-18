@@ -65,7 +65,11 @@ generate_bindings() {
     --additional "-isystem" "${LLVM_PATH}/lib/clang/20/include/" \
     --additional "-isystem" "${SDK_PATH}/usr/include" \
     --include-directory "${HEADERS_DIR}" \
-    --exclude "Node" \
+    --exclude "facebook::yoga::Config" \
+    --exclude "facebook::yoga::Node" \
+    --exclude "facebook::yoga::LayoutResults" \
+    --exclude "facebook::yoga::calculateFlexLine" \
+    --exclude "facebook::yoga::Event" \
     "$@";
 }
 
