@@ -28,6 +28,8 @@ namespace Yoga.NET.Interop
         [NativeTypeName("facebook::yoga::CachedMeasurement")]
         public CachedMeasurement cachedLayout;
 
+        [NativeBitfield("direction_", offset: 0, length: 2)]
+        [NativeBitfield("hadOverflow_", offset: 2, length: 1)]
         public byte _bitfield;
 
         [NativeTypeName("facebook::yoga::Direction : 2")]

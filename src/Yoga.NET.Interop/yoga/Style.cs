@@ -2,6 +2,9 @@ namespace Yoga.NET.Interop
 {
     public partial struct Style
     {
+        [NativeBitfield("direction_", offset: 0, length: 2)]
+        [NativeBitfield("flexDirection_", offset: 2, length: 2)]
+        [NativeBitfield("justifyContent_", offset: 4, length: 3)]
         public byte _bitfield1;
 
         [NativeTypeName("facebook::yoga::Direction : 2")]
@@ -46,6 +49,8 @@ namespace Yoga.NET.Interop
             }
         }
 
+        [NativeBitfield("alignContent_", offset: 0, length: 4)]
+        [NativeBitfield("alignItems_", offset: 4, length: 4)]
         public byte _bitfield2;
 
         [NativeTypeName("facebook::yoga::Align : 4")]
@@ -76,6 +81,9 @@ namespace Yoga.NET.Interop
             }
         }
 
+        [NativeBitfield("alignSelf_", offset: 0, length: 4)]
+        [NativeBitfield("positionType_", offset: 4, length: 2)]
+        [NativeBitfield("flexWrap_", offset: 6, length: 2)]
         public byte _bitfield3;
 
         [NativeTypeName("facebook::yoga::Align : 4")]
@@ -120,6 +128,9 @@ namespace Yoga.NET.Interop
             }
         }
 
+        [NativeBitfield("overflow_", offset: 0, length: 2)]
+        [NativeBitfield("display_", offset: 2, length: 2)]
+        [NativeBitfield("boxSizing_", offset: 4, length: 1)]
         public byte _bitfield4;
 
         [NativeTypeName("facebook::yoga::Overflow : 2")]

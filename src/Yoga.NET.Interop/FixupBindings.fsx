@@ -29,6 +29,8 @@ let fixups: Fixup list = [
     Regex("""array<int, unchecked\(\(byte\)\(COUNT\)\)>"""), (fun (_, _) -> "InlineArray8<byte>")
     Regex("SmallValueBuffer<(?<size>\d+)>"), (fun (m, _) -> sprintf "SmallValueBuffer%s" m.Groups["size"].Value)
     Regex("bitset<1>"), (fun (_, _) -> "byte")
+    Regex("""(?<=public unsafe partial struct Node.*)public bool _bitfield""", RegexOptions.Singleline), (fun (_, _) ->
+        "public byte _bitfield")
 ]
 
 for filePath in Directory.EnumerateFiles processingDir do

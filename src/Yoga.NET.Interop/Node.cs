@@ -3,34 +3,30 @@ using System.Runtime.InteropServices;
 
 namespace Yoga.NET.Interop
 {
-    public partial struct Node
-    {
-    }
-
-    public partial struct Node
-    {
-    }
-
-    public partial struct Node
-    {
-    }
 
     [NativeTypeName("struct Node : YGNode")]
     public unsafe partial struct Node
     {
-        public bool _bitfield;
+        [NativeBitfield("hasNewLayout_", offset: 0, length: 1)]
+        [NativeBitfield("isReferenceBaseline_", offset: 1, length: 1)]
+        [NativeBitfield("isDirty_", offset: 2, length: 1)]
+        [NativeBitfield("alwaysFormsContainingBlock_", offset: 3, length: 1)]
+        [NativeBitfield("nodeType_", offset: 4, length: 1)]
+        public byte _bitfield;
 
         [NativeTypeName("bool : 1")]
         private bool hasNewLayout_
         {
             readonly get
             {
-                return (bool)(_bitfield & 0x1);
+                // return (bool)(_bitfield & 0x1);
+                return (_bitfield & 0x1) != 0;
             }
 
             set
             {
-                _bitfield = (bool)((_bitfield & ~0x1) | (value & 0x1));
+                // _bitfield = (bool)((_bitfield & ~0x1) | (value & 0x1));
+                _bitfield = (byte)((this._bitfield & ~0x1) | (value ? 1 : 0));
             }
         }
 
@@ -39,12 +35,14 @@ namespace Yoga.NET.Interop
         {
             readonly get
             {
-                return (bool)((_bitfield >> 1) & 0x1);
+                // return (bool)((_bitfield >> 1) & 0x1);
+                return ((_bitfield >> 1) & 0x1) != 0;
             }
 
             set
             {
-                _bitfield = (bool)((_bitfield & ~(0x1 << 1)) | ((value & 0x1) << 1));
+                // _bitfield = (bool)((_bitfield & ~(0x1 << 1)) | ((value & 0x1) << 1));
+                _bitfield = (byte)((_bitfield & ~(0x1 << 1)) | ((value ? 1 : 0) << 1));
             }
         }
 
@@ -53,12 +51,14 @@ namespace Yoga.NET.Interop
         {
             readonly get
             {
-                return (bool)((_bitfield >> 2) & 0x1);
+                // return (bool)((_bitfield >> 2) & 0x1);
+                return ((_bitfield >> 2) & 0x1) != 0;
             }
 
             set
             {
-                _bitfield = (bool)((_bitfield & ~(0x1 << 2)) | ((value & 0x1) << 2));
+                // _bitfield = (bool)((_bitfield & ~(0x1 << 2)) | ((value & 0x1) << 2));
+                _bitfield = (byte)((_bitfield & ~(0x1 << 2)) | ((value ? 1 : 0) << 2));
             }
         }
 
@@ -67,12 +67,14 @@ namespace Yoga.NET.Interop
         {
             readonly get
             {
-                return (bool)((_bitfield >> 3) & 0x1);
+                // return (bool)((_bitfield >> 3) & 0x1);
+                return ((_bitfield >> 3) & 0x1) != 0;
             }
 
             set
             {
-                _bitfield = (bool)((_bitfield & ~(0x1 << 3)) | ((value & 0x1) << 3));
+                // _bitfield = (bool)((_bitfield & ~(0x1 << 3)) | ((value & 0x1) << 3));
+                _bitfield = (byte)((_bitfield & ~(0x1 << 3)) | ((value ? 1 : 0) << 3));
             }
         }
 
@@ -86,7 +88,8 @@ namespace Yoga.NET.Interop
 
             set
             {
-                _bitfield = (bool)((_bitfield & ~(0x1 << 4)) | (((bool)(value) & 0x1u) << 4));
+                // _bitfield = (bool)((_bitfield & ~(0x1 << 4)) | (((bool)(value) & 0x1u) << 4));
+                _bitfield = (byte)((_bitfield & ~(0x1 << 4)) | ((value != NodeType.Default ? 1 : 0) << 4));
             }
         }
 

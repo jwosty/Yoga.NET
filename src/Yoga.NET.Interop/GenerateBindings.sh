@@ -4,7 +4,7 @@ set -e
 SCRIPT_DIR=$(dirname "$0")
 echo "SCRIPT_DIR=${SCRIPT_DIR}"
 
-OUTPUT_DIR="${SCRIPT_DIR}/yoga/"
+OUTPUT_DIR="${SCRIPT_DIR}/yoga"
 
 SDK_PATH=$(xcrun --show-sdk-path)
 echo "SDK_PATH: ${SDK_PATH}"
@@ -46,7 +46,7 @@ if [ ! -f "${LIBCLANGSHARP_LINK_TARGET}" ]; then
   cp "${LIBCLANGSHARP_LOCATION}" "${LIBCLANGSHARP_LINK_TARGET}"
 fi
 
-rm -f "${SCRIPT_DIR}/yoga/*.cs"
+rm -f "${OUTPUT_DIR}"/*.cs
 
 #export LD_DEBUG=libs
 
@@ -56,7 +56,7 @@ generate_bindings() {
   dotnet ClangSharpPInvokeGenerator \
     --language c++ \
     --std c++20 \
-    --config latest-codegen unix-types generate-helper-types multi-file exclude-funcs-with-body \
+    --config latest-codegen unix-types generate-helper-types multi-file exclude-funcs-with-body generate-native-bitfield-attribute \
     --output "${OUTPUT_DIR}" \
     --namespace "Yoga.NET.Interop" \
     --additional "-isysroot" "${SDK_PATH}" \
@@ -65,6 +65,7 @@ generate_bindings() {
     --additional "-isystem" "${LLVM_PATH}/lib/clang/20/include/" \
     --additional "-isystem" "${SDK_PATH}/usr/include" \
     --include-directory "${HEADERS_DIR}" \
+    --exclude "Node" \
     "$@";
 }
 

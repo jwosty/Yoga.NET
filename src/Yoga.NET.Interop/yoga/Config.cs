@@ -11,6 +11,7 @@ namespace Yoga.NET.Interop
         [NativeTypeName("YGLogger")]
         private delegate* unmanaged[Cdecl]<YGConfig*, YGNode*, YGLogLevel, sbyte*, sbyte*, int> logger_;
 
+        [NativeBitfield("useWebDefaults_", offset: 0, length: 1)]
         public bool _bitfield;
 
         [NativeTypeName("bool : 1")]
