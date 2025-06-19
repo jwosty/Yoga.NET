@@ -4,6 +4,6 @@ namespace Yoga.NET.Interop
     {
         public float value;
 
-        public YGUnit unit;
+        public YogaUnit unit;
     }
 }

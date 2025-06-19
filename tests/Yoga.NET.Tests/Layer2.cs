@@ -17,7 +17,7 @@ public class Layer2
         using var root = new YogaNode();
         root.Width = 42;
         root.Height = 84;
-        root.CalculateLayout(yoga.YGUndefined, yoga.YGUndefined, YGDirection.YGDirectionLTR);
+        root.CalculateLayout(yoga.YGUndefined, yoga.YGUndefined, YogaDirection.LTR);
         Assert.Equal(42, root.LayoutWidth);
         Assert.Equal(84, root.LayoutHeight);
     }
@@ -26,7 +26,7 @@ public class Layer2
     public void YogaNodeCalcLayout()
     {
         var root = new YogaNode();
-        root.FlexDirection = FlexDirection.Row;
+        root.FlexDirection = YogaFlexDirection.Row;
         root.Width = 200;
         root.Height = 100;
 
@@ -40,7 +40,7 @@ public class Layer2
         child1.FlexGrow = 1;
         root.InsertChild(1, child1);
 
-        root.CalculateLayout(YogaConstants.Undefined, YogaConstants.Undefined, YGDirection.YGDirectionLTR);
+        root.CalculateLayout(YogaConstants.Undefined, YogaConstants.Undefined, YogaDirection.LTR);
 
         Assert.Equal(0, root.LayoutLeft);
         Assert.Equal(0, root.LayoutRight);

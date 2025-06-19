@@ -30,13 +30,13 @@ namespace Yoga.NET.Interop
         public static extern float YGConfigGetPointScaleFactor([NativeTypeName("YGConfigConstRef")] YGConfig* config);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGConfigSetErrata([NativeTypeName("YGConfigRef")] YGConfig* config, YGErrata errata);
+        public static extern void YGConfigSetErrata([NativeTypeName("YGConfigRef")] YGConfig* config, YogaErrata errata);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGErrata YGConfigGetErrata([NativeTypeName("YGConfigConstRef")] YGConfig* config);
+        public static extern YogaErrata YGConfigGetErrata([NativeTypeName("YGConfigConstRef")] YGConfig* config);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGConfigSetLogger([NativeTypeName("YGConfigRef")] YGConfig* config, [NativeTypeName("YGLogger")] delegate* unmanaged[Cdecl]<YGConfig*, YGNode*, YGLogLevel, sbyte*, sbyte*, int> logger);
+        public static extern void YGConfigSetLogger([NativeTypeName("YGConfigRef")] YGConfig* config, [NativeTypeName("YGLogger")] delegate* unmanaged[Cdecl]<YGConfig*, YGNode*, YogaLogLevel, sbyte*, sbyte*, int> logger);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void YGConfigSetContext([NativeTypeName("YGConfigRef")] YGConfig* config, void* context);
@@ -45,86 +45,86 @@ namespace Yoga.NET.Interop
         public static extern void* YGConfigGetContext([NativeTypeName("YGConfigConstRef")] YGConfig* config);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGConfigSetExperimentalFeatureEnabled([NativeTypeName("YGConfigRef")] YGConfig* config, YGExperimentalFeature feature, [NativeTypeName("bool")] byte enabled);
+        public static extern void YGConfigSetExperimentalFeatureEnabled([NativeTypeName("YGConfigRef")] YGConfig* config, YogaExperimentalFeature feature, [NativeTypeName("bool")] byte enabled);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte YGConfigIsExperimentalFeatureEnabled([NativeTypeName("YGConfigConstRef")] YGConfig* config, YGExperimentalFeature feature);
+        public static extern byte YGConfigIsExperimentalFeatureEnabled([NativeTypeName("YGConfigConstRef")] YGConfig* config, YogaExperimentalFeature feature);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void YGConfigSetCloneNodeFunc([NativeTypeName("YGConfigRef")] YGConfig* config, [NativeTypeName("YGCloneNodeFunc")] delegate* unmanaged[Cdecl]<YGNode*, YGNode*, nuint, YGNode*> callback);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGAlignToString(YGAlign param0);
+        public static extern sbyte* YogaAlignToString(YogaAlign param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGBoxSizingToString(YGBoxSizing param0);
+        public static extern sbyte* YogaBoxSizingToString(YogaBoxSizing param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGDimensionToString(YGDimension param0);
+        public static extern sbyte* YogaDimensionToString(YogaDimension param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGDirectionToString(YGDirection param0);
+        public static extern sbyte* YogaDirectionToString(YogaDirection param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGDisplayToString(YGDisplay param0);
+        public static extern sbyte* YogaDisplayToString(YogaDisplay param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGEdgeToString(YGEdge param0);
+        public static extern sbyte* YogaEdgeToString(YogaEdge param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGErrataToString(YGErrata param0);
+        public static extern sbyte* YogaErrataToString(YogaErrata param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGExperimentalFeatureToString(YGExperimentalFeature param0);
+        public static extern sbyte* YogaExperimentalFeatureToString(YogaExperimentalFeature param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGFlexDirectionToString(YGFlexDirection param0);
+        public static extern sbyte* YogaFlexDirectionToString(YogaFlexDirection param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGGutterToString(YGGutter param0);
+        public static extern sbyte* YogaGutterToString(YogaGutter param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGJustifyToString(YGJustify param0);
+        public static extern sbyte* YogaJustifyToString(YogaJustify param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGLogLevelToString(YGLogLevel param0);
+        public static extern sbyte* YogaLogLevelToString(YogaLogLevel param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGMeasureModeToString(YGMeasureMode param0);
+        public static extern sbyte* YogaMeasureModeToString(YogaMeasureMode param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGNodeTypeToString(YGNodeType param0);
+        public static extern sbyte* YogaNodeTypeToString(YogaNodeType param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGOverflowToString(YGOverflow param0);
+        public static extern sbyte* YogaOverflowToString(YogaOverflow param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGPositionTypeToString(YGPositionType param0);
+        public static extern sbyte* YogaPositionTypeToString(YogaPositionType param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGUnitToString(YGUnit param0);
+        public static extern sbyte* YogaUnitToString(YogaUnit param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* YGWrapToString(YGWrap param0);
+        public static extern sbyte* YogaWrapToString(YogaWrap param0);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("YGNodeRef")]
@@ -151,7 +151,7 @@ namespace Yoga.NET.Interop
         public static extern void YGNodeReset([NativeTypeName("YGNodeRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeCalculateLayout([NativeTypeName("YGNodeRef")] YGNode* node, float availableWidth, float availableHeight, YGDirection ownerDirection);
+        public static extern void YGNodeCalculateLayout([NativeTypeName("YGNodeRef")] YGNode* node, float availableWidth, float availableHeight, YogaDirection ownerDirection);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -219,7 +219,7 @@ namespace Yoga.NET.Interop
         public static extern void* YGNodeGetContext([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeSetMeasureFunc([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("YGMeasureFunc")] delegate* unmanaged[Cdecl]<YGNode*, float, YGMeasureMode, float, YGMeasureMode, YGSize> measureFunc);
+        public static extern void YGNodeSetMeasureFunc([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("YGMeasureFunc")] delegate* unmanaged[Cdecl]<YGNode*, float, YogaMeasureMode, float, YogaMeasureMode, YGSize> measureFunc);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -240,10 +240,10 @@ namespace Yoga.NET.Interop
         public static extern byte YGNodeIsReferenceBaseline([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeSetNodeType([NativeTypeName("YGNodeRef")] YGNode* node, YGNodeType nodeType);
+        public static extern void YGNodeSetNodeType([NativeTypeName("YGNodeRef")] YGNode* node, YogaNodeType nodeType);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGNodeType YGNodeGetNodeType([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaNodeType YGNodeGetNodeType([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void YGNodeSetAlwaysFormsContainingBlock([NativeTypeName("YGNodeRef")] YGNode* node, [NativeTypeName("bool")] byte alwaysFormsContainingBlock);
@@ -255,7 +255,7 @@ namespace Yoga.NET.Interop
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         [Obsolete("YGNodeCanUseCachedMeasurement may be removed in a future version of Yoga")]
-        public static extern byte YGNodeCanUseCachedMeasurement(YGMeasureMode widthMode, float availableWidth, YGMeasureMode heightMode, float availableHeight, YGMeasureMode lastWidthMode, float lastAvailableWidth, YGMeasureMode lastHeightMode, float lastAvailableHeight, float lastComputedWidth, float lastComputedHeight, float marginRow, float marginColumn, [NativeTypeName("YGConfigRef")] YGConfig* config);
+        public static extern byte YGNodeCanUseCachedMeasurement(YogaMeasureMode widthMode, float availableWidth, YogaMeasureMode heightMode, float availableHeight, YogaMeasureMode lastWidthMode, float lastAvailableWidth, YogaMeasureMode lastHeightMode, float lastAvailableHeight, float lastComputedWidth, float lastComputedHeight, float marginRow, float marginColumn, [NativeTypeName("YGConfigRef")] YGConfig* config);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern float YGNodeLayoutGetLeft([NativeTypeName("YGNodeConstRef")] YGNode* node);
@@ -276,83 +276,83 @@ namespace Yoga.NET.Interop
         public static extern float YGNodeLayoutGetHeight([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGDirection YGNodeLayoutGetDirection([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaDirection YGNodeLayoutGetDirection([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern byte YGNodeLayoutGetHadOverflow([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float YGNodeLayoutGetMargin([NativeTypeName("YGNodeConstRef")] YGNode* node, YGEdge edge);
+        public static extern float YGNodeLayoutGetMargin([NativeTypeName("YGNodeConstRef")] YGNode* node, YogaEdge edge);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float YGNodeLayoutGetBorder([NativeTypeName("YGNodeConstRef")] YGNode* node, YGEdge edge);
+        public static extern float YGNodeLayoutGetBorder([NativeTypeName("YGNodeConstRef")] YGNode* node, YogaEdge edge);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float YGNodeLayoutGetPadding([NativeTypeName("YGNodeConstRef")] YGNode* node, YGEdge edge);
+        public static extern float YGNodeLayoutGetPadding([NativeTypeName("YGNodeConstRef")] YGNode* node, YogaEdge edge);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void YGNodeCopyStyle([NativeTypeName("YGNodeRef")] YGNode* dstNode, [NativeTypeName("YGNodeConstRef")] YGNode* srcNode);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetDirection([NativeTypeName("YGNodeRef")] YGNode* node, YGDirection direction);
+        public static extern void YGNodeStyleSetDirection([NativeTypeName("YGNodeRef")] YGNode* node, YogaDirection direction);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGDirection YGNodeStyleGetDirection([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaDirection YGNodeStyleGetDirection([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetFlexDirection([NativeTypeName("YGNodeRef")] YGNode* node, YGFlexDirection flexDirection);
+        public static extern void YGNodeStyleSetFlexDirection([NativeTypeName("YGNodeRef")] YGNode* node, YogaFlexDirection flexDirection);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGFlexDirection YGNodeStyleGetFlexDirection([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaFlexDirection YGNodeStyleGetFlexDirection([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetJustifyContent([NativeTypeName("YGNodeRef")] YGNode* node, YGJustify justifyContent);
+        public static extern void YGNodeStyleSetJustifyContent([NativeTypeName("YGNodeRef")] YGNode* node, YogaJustify justifyContent);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGJustify YGNodeStyleGetJustifyContent([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaJustify YGNodeStyleGetJustifyContent([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetAlignContent([NativeTypeName("YGNodeRef")] YGNode* node, YGAlign alignContent);
+        public static extern void YGNodeStyleSetAlignContent([NativeTypeName("YGNodeRef")] YGNode* node, YogaAlign alignContent);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGAlign YGNodeStyleGetAlignContent([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaAlign YGNodeStyleGetAlignContent([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetAlignItems([NativeTypeName("YGNodeRef")] YGNode* node, YGAlign alignItems);
+        public static extern void YGNodeStyleSetAlignItems([NativeTypeName("YGNodeRef")] YGNode* node, YogaAlign alignItems);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGAlign YGNodeStyleGetAlignItems([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaAlign YGNodeStyleGetAlignItems([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetAlignSelf([NativeTypeName("YGNodeRef")] YGNode* node, YGAlign alignSelf);
+        public static extern void YGNodeStyleSetAlignSelf([NativeTypeName("YGNodeRef")] YGNode* node, YogaAlign alignSelf);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGAlign YGNodeStyleGetAlignSelf([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaAlign YGNodeStyleGetAlignSelf([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetPositionType([NativeTypeName("YGNodeRef")] YGNode* node, YGPositionType positionType);
+        public static extern void YGNodeStyleSetPositionType([NativeTypeName("YGNodeRef")] YGNode* node, YogaPositionType positionType);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGPositionType YGNodeStyleGetPositionType([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaPositionType YGNodeStyleGetPositionType([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetFlexWrap([NativeTypeName("YGNodeRef")] YGNode* node, YGWrap flexWrap);
+        public static extern void YGNodeStyleSetFlexWrap([NativeTypeName("YGNodeRef")] YGNode* node, YogaWrap flexWrap);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGWrap YGNodeStyleGetFlexWrap([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaWrap YGNodeStyleGetFlexWrap([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetOverflow([NativeTypeName("YGNodeRef")] YGNode* node, YGOverflow overflow);
+        public static extern void YGNodeStyleSetOverflow([NativeTypeName("YGNodeRef")] YGNode* node, YogaOverflow overflow);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGOverflow YGNodeStyleGetOverflow([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaOverflow YGNodeStyleGetOverflow([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetDisplay([NativeTypeName("YGNodeRef")] YGNode* node, YGDisplay display);
+        public static extern void YGNodeStyleSetDisplay([NativeTypeName("YGNodeRef")] YGNode* node, YogaDisplay display);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGDisplay YGNodeStyleGetDisplay([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaDisplay YGNodeStyleGetDisplay([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void YGNodeStyleSetFlex([NativeTypeName("YGNodeRef")] YGNode* node, float flex);
@@ -385,58 +385,58 @@ namespace Yoga.NET.Interop
         public static extern YGValue YGNodeStyleGetFlexBasis([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetPosition([NativeTypeName("YGNodeRef")] YGNode* node, YGEdge edge, float position);
+        public static extern void YGNodeStyleSetPosition([NativeTypeName("YGNodeRef")] YGNode* node, YogaEdge edge, float position);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetPositionPercent([NativeTypeName("YGNodeRef")] YGNode* node, YGEdge edge, float position);
+        public static extern void YGNodeStyleSetPositionPercent([NativeTypeName("YGNodeRef")] YGNode* node, YogaEdge edge, float position);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGValue YGNodeStyleGetPosition([NativeTypeName("YGNodeConstRef")] YGNode* node, YGEdge edge);
+        public static extern YGValue YGNodeStyleGetPosition([NativeTypeName("YGNodeConstRef")] YGNode* node, YogaEdge edge);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetPositionAuto([NativeTypeName("YGNodeRef")] YGNode* node, YGEdge edge);
+        public static extern void YGNodeStyleSetPositionAuto([NativeTypeName("YGNodeRef")] YGNode* node, YogaEdge edge);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetMargin([NativeTypeName("YGNodeRef")] YGNode* node, YGEdge edge, float margin);
+        public static extern void YGNodeStyleSetMargin([NativeTypeName("YGNodeRef")] YGNode* node, YogaEdge edge, float margin);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetMarginPercent([NativeTypeName("YGNodeRef")] YGNode* node, YGEdge edge, float margin);
+        public static extern void YGNodeStyleSetMarginPercent([NativeTypeName("YGNodeRef")] YGNode* node, YogaEdge edge, float margin);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetMarginAuto([NativeTypeName("YGNodeRef")] YGNode* node, YGEdge edge);
+        public static extern void YGNodeStyleSetMarginAuto([NativeTypeName("YGNodeRef")] YGNode* node, YogaEdge edge);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGValue YGNodeStyleGetMargin([NativeTypeName("YGNodeConstRef")] YGNode* node, YGEdge edge);
+        public static extern YGValue YGNodeStyleGetMargin([NativeTypeName("YGNodeConstRef")] YGNode* node, YogaEdge edge);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetPadding([NativeTypeName("YGNodeRef")] YGNode* node, YGEdge edge, float padding);
+        public static extern void YGNodeStyleSetPadding([NativeTypeName("YGNodeRef")] YGNode* node, YogaEdge edge, float padding);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetPaddingPercent([NativeTypeName("YGNodeRef")] YGNode* node, YGEdge edge, float padding);
+        public static extern void YGNodeStyleSetPaddingPercent([NativeTypeName("YGNodeRef")] YGNode* node, YogaEdge edge, float padding);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGValue YGNodeStyleGetPadding([NativeTypeName("YGNodeConstRef")] YGNode* node, YGEdge edge);
+        public static extern YGValue YGNodeStyleGetPadding([NativeTypeName("YGNodeConstRef")] YGNode* node, YogaEdge edge);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetBorder([NativeTypeName("YGNodeRef")] YGNode* node, YGEdge edge, float border);
+        public static extern void YGNodeStyleSetBorder([NativeTypeName("YGNodeRef")] YGNode* node, YogaEdge edge, float border);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float YGNodeStyleGetBorder([NativeTypeName("YGNodeConstRef")] YGNode* node, YGEdge edge);
+        public static extern float YGNodeStyleGetBorder([NativeTypeName("YGNodeConstRef")] YGNode* node, YogaEdge edge);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetGap([NativeTypeName("YGNodeRef")] YGNode* node, YGGutter gutter, float gapLength);
+        public static extern void YGNodeStyleSetGap([NativeTypeName("YGNodeRef")] YGNode* node, YogaGutter gutter, float gapLength);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetGapPercent([NativeTypeName("YGNodeRef")] YGNode* node, YGGutter gutter, float gapLength);
+        public static extern void YGNodeStyleSetGapPercent([NativeTypeName("YGNodeRef")] YGNode* node, YogaGutter gutter, float gapLength);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float YGNodeStyleGetGap([NativeTypeName("YGNodeConstRef")] YGNode* node, YGGutter gutter);
+        public static extern float YGNodeStyleGetGap([NativeTypeName("YGNodeConstRef")] YGNode* node, YogaGutter gutter);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void YGNodeStyleSetBoxSizing([NativeTypeName("YGNodeRef")] YGNode* node, YGBoxSizing boxSizing);
+        public static extern void YGNodeStyleSetBoxSizing([NativeTypeName("YGNodeRef")] YGNode* node, YogaBoxSizing boxSizing);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern YGBoxSizing YGNodeStyleGetBoxSizing([NativeTypeName("YGNodeConstRef")] YGNode* node);
+        public static extern YogaBoxSizing YGNodeStyleGetBoxSizing([NativeTypeName("YGNodeConstRef")] YGNode* node);
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void YGNodeStyleSetWidth([NativeTypeName("YGNodeRef")] YGNode* node, float width);
@@ -572,7 +572,7 @@ namespace Yoga.NET.Interop
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga16getDefaultLoggerEv", ExactSpelling = true)]
         [return: NativeTypeName("YGLogger")]
-        public static extern delegate* unmanaged[Cdecl]<YGConfig*, YGNode*, YGLogLevel, sbyte*, sbyte*, int> getDefaultLogger();
+        public static extern delegate* unmanaged[Cdecl]<YGConfig*, YGNode*, YogaLogLevel, sbyte*, sbyte*, int> getDefaultLogger();
 
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, EntryPoint = "__ZN8facebook4yoga24LayoutPassReasonToStringENS0_16LayoutPassReasonE", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]

@@ -14,7 +14,12 @@ type Ctx = { mutable lastEnumType: string }
 type Fixup = Regex * (Match * Ctx -> string)
 
 let fixups: Fixup list = [
-    Regex("public enum \w+ : (?<type>\w+)|((?<a>\w+ = )(?<b>YG\w+,))+"), (fun (m, ctx) ->
+    // fix this specific enum case being a red herring for ClangSharpPInvokeGenerator enum prefix strip (special case -
+    // this enum field is the name of the overall enum)
+    Regex(" = YGWrap.YGWrapWrap,"), (fun (_, _) -> "Wrap = YGWrap.YGWrapWrap,")
+    // work around ClangSharpPInvokeGenerator not adding casts where necessary in enum definitions depending on values
+    // of a different type (that gets implicitly cast in C)
+    Regex("public enum \w+ : (?<type>\w+)|((?<a>\w+ = )(?<b>YG[a-zA-Z.]+,))+"), (fun (m, ctx) ->
         let _t = m.Groups["type"].Value
         if not (String.IsNullOrEmpty _t) then
             ctx.lastEnumType <- _t
@@ -22,11 +27,15 @@ let fixups: Fixup list = [
         else
             m.Groups["a"].Value + $"(%s{ctx.lastEnumType})" + m.Groups["b"].Value
     )
+    // changing the YG prefix to Yoga in all enum types
+    Regex("YG(?=Align|BoxSizing|Dimension|Direction|Display|Edge|Errata|ExperimentalFeature|FlexDirection|Gutter|Justify|LogLevel|MeasureMode|NodeType|PositionType|Unit|Wrap|Overflow)"), (fun (_, _) -> "Yoga")
+    // fixing up a bug where ClangSharpPInvokeGenerator doesn't properly handle enum prefix stripping at the call site
+    Regex("(Yoga(Align|BoxSizing|Dimension|Direction|Display|Edge|Errata|ExperimentalFeature|FlexDirection|Gutter|Justify|LogLevel|MeasureMode|NodeType|PositionType|Unit|Wrap|Overflow))\.\1"), (fun (m, _) -> m.Groups[1].Value + ".")
     Regex("(?<=\d)'"), (fun (_, _) -> "")
     Regex("NaN"), (fun (_, _) -> "Single.NaN")
     Regex("(private|public) array<(?<type>\w+),\s*(?<size>\d+)>"), (fun (m, _) ->
         sprintf "InlineArray%s<%s>" m.Groups["size"].Value m.Groups["type"].Value)
-    Regex("""array<int, unchecked\(\(byte\)\(COUNT\)\)>"""), (fun (_, _) -> "InlineArray8<int>")
+    Regex("""array<int, unchecked\(\(byte\)\(LayoutPassReason\.COUNT\)\)>"""), (fun (_, _) -> "InlineArray8<int>")
     Regex("""array<CachedMeasurement, MaxCachedMeasurements>"""), (fun (m, _) -> "InlineArray8<CachedMeasurement>")
     Regex("""vector<(?<type>\w+)>"""), (fun (m, _) -> sprintf "CppVector<%s>" m.Groups["type"].Value)
     Regex("SmallValueBuffer<(?<size>\d+)>"), (fun (m, _) -> sprintf "SmallValueBuffer%s" m.Groups["size"].Value)

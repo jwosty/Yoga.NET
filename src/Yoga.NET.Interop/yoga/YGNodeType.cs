@@ -1,9 +1,9 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGNodeType : uint
+    public enum YogaNodeType : uint
     {
-        YGNodeTypeDefault,
-        YGNodeTypeText,
+        Default,
+        Text,
     }
 }

@@ -27,7 +27,7 @@ public unsafe class YogaNode : IDisposable
         this.Handle = yoga.YGNodeNewWithConfig(config.Handle);
     }
 
-    public void CalculateLayout(float availableWidth = yoga.YGUndefined, float availableHeight = yoga.YGUndefined, YGDirection? ownerDirection = null)
+    public void CalculateLayout(float availableWidth = yoga.YGUndefined, float availableHeight = yoga.YGUndefined, YogaDirection? ownerDirection = null)
     {
         yoga.YGNodeCalculateLayout(this.Handle, availableWidth, availableHeight,
             ownerDirection ?? yoga.YGNodeStyleGetDirection(this.Handle));
@@ -83,17 +83,24 @@ public unsafe class YogaNode : IDisposable
 
     #region Style
 
-    public YGDirection Direction
+    public YogaDirection Direction
     {
         get => yoga.YGNodeStyleGetDirection(this.Handle);
         set =>  yoga.YGNodeStyleSetDirection(this.Handle, value);
     }
 
-    public FlexDirection FlexDirection
+    public YogaFlexDirection FlexDirection
     {
-        get => (FlexDirection)yoga.YGNodeStyleGetFlexDirection(this.Handle);
-        set => yoga.YGNodeStyleSetFlexDirection(this.Handle, (YGFlexDirection)value);
+        get => yoga.YGNodeStyleGetFlexDirection(this.Handle);
+        set => yoga.YGNodeStyleSetFlexDirection(this.Handle, value);
     }
+
+    public YogaJustify JustifyContent
+    {
+        get => yoga.YGNodeStyleGetJustifyContent(this.Handle);
+        set => yoga.YGNodeStyleSetJustifyContent(this.Handle, value);
+    }
+
 
     public float FlexGrow
     {
@@ -129,59 +136,59 @@ public unsafe class YogaNode : IDisposable
 
     public YogaValue MarginLeft
     {
-        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeLeft);
-        set => this.SetStyleMargin(YGEdge.YGEdgeLeft, value);
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YogaEdge.Left);
+        set => this.SetStyleMargin(YogaEdge.Left, value);
     }
 
     public YogaValue MarginTop
     {
-        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeTop);
-        set => this.SetStyleMargin(YGEdge.YGEdgeTop, value);
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YogaEdge.Top);
+        set => this.SetStyleMargin(YogaEdge.Top, value);
     }
 
     public YogaValue MarginRight
     {
-        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeRight);
-        set => this.SetStyleMargin(YGEdge.YGEdgeRight, value);
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YogaEdge.Right);
+        set => this.SetStyleMargin(YogaEdge.Right, value);
     }
 
     public YogaValue MarginBottom
     {
-        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeBottom);
-        set => this.SetStyleMargin(YGEdge.YGEdgeBottom, value);
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YogaEdge.Bottom);
+        set => this.SetStyleMargin(YogaEdge.Bottom, value);
     }
 
     public YogaValue MarginStart
     {
-        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeStart);
-        set => this.SetStyleMargin(YGEdge.YGEdgeStart, value);
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YogaEdge.Start);
+        set => this.SetStyleMargin(YogaEdge.Start, value);
     }
 
     public YogaValue MarginEnd
     {
-        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeEnd);
-        set => this.SetStyleMargin(YGEdge.YGEdgeEnd, value);
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YogaEdge.End);
+        set => this.SetStyleMargin(YogaEdge.End, value);
     }
 
     public YogaValue MarginHorizontal
     {
-        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeHorizontal);
-        set => this.SetStyleMargin(YGEdge.YGEdgeHorizontal, value);
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YogaEdge.Horizontal);
+        set => this.SetStyleMargin(YogaEdge.Horizontal, value);
     }
 
     public YogaValue MarginVertical
     {
-        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeVertical);
-        set => this.SetStyleMargin(YGEdge.YGEdgeVertical, value);
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YogaEdge.Vertical);
+        set => this.SetStyleMargin(YogaEdge.Vertical, value);
     }
 
     public YogaValue Margin
     {
-        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeAll);
-        set => this.SetStyleMargin(YGEdge.YGEdgeAll, value);
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YogaEdge.All);
+        set => this.SetStyleMargin(YogaEdge.All, value);
     }
 
-    private void SetStyleMargin(YGEdge edge, YogaValue value)
+    private void SetStyleMargin(YogaEdge edge, YogaValue value)
     {
         switch (value.Unit)
         {

@@ -1,10 +1,10 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGPositionType : uint
+    public enum YogaPositionType : uint
     {
-        YGPositionTypeStatic,
-        YGPositionTypeRelative,
-        YGPositionTypeAbsolute,
+        Static,
+        Relative,
+        Absolute,
     }
 }

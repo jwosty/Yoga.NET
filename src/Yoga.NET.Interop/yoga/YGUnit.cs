@@ -1,11 +1,11 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGUnit : uint
+    public enum YogaUnit : uint
     {
-        YGUnitUndefined,
-        YGUnitPoint,
-        YGUnitPercent,
-        YGUnitAuto,
+        Undefined,
+        Point,
+        Percent,
+        Auto,
     }
 }

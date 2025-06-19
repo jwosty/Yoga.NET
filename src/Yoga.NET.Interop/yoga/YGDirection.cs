@@ -1,10 +1,10 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGDirection : uint
+    public enum YogaDirection : uint
     {
-        YGDirectionInherit,
-        YGDirectionLTR,
-        YGDirectionRTL,
+        Inherit,
+        LTR,
+        RTL,
     }
 }

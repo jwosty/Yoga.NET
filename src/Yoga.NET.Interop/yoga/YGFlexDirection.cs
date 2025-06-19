@@ -1,11 +1,11 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGFlexDirection : uint
+    public enum YogaFlexDirection : uint
     {
-        YGFlexDirectionColumn,
-        YGFlexDirectionColumnReverse,
-        YGFlexDirectionRow,
-        YGFlexDirectionRowReverse,
+        Column,
+        ColumnReverse,
+        Row,
+        RowReverse,
     }
 }

@@ -1,10 +1,10 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGOverflow : uint
+    public enum YogaOverflow : uint
     {
-        YGOverflowVisible,
-        YGOverflowHidden,
-        YGOverflowScroll,
+        Visible,
+        Hidden,
+        Scroll,
     }
 }

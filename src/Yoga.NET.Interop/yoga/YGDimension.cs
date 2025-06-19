@@ -1,9 +1,9 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGDimension : uint
+    public enum YogaDimension : uint
     {
-        YGDimensionWidth,
-        YGDimensionHeight,
+        Width,
+        Height,
     }
 }

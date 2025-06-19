@@ -1,13 +1,13 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGJustify : uint
+    public enum YogaJustify : uint
     {
-        YGJustifyFlexStart,
-        YGJustifyCenter,
-        YGJustifyFlexEnd,
-        YGJustifySpaceBetween,
-        YGJustifySpaceAround,
-        YGJustifySpaceEvenly,
+        FlexStart,
+        Center,
+        FlexEnd,
+        SpaceBetween,
+        SpaceAround,
+        SpaceEvenly,
     }
 }

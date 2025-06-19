@@ -1,15 +1,13 @@
-using static Yoga.NET.Interop.YGJustify;
-
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("uint8_t")]
     public enum Justify : byte
     {
-        FlexStart = (byte)YGJustifyFlexStart,
-        Center = (byte)YGJustifyCenter,
-        FlexEnd = (byte)YGJustifyFlexEnd,
-        SpaceBetween = (byte)YGJustifySpaceBetween,
-        SpaceAround = (byte)YGJustifySpaceAround,
-        SpaceEvenly = (byte)YGJustifySpaceEvenly,
+        FlexStart = (byte)YogaJustify.FlexStart,
+        Center = (byte)YogaJustify.Center,
+        FlexEnd = (byte)YogaJustify.FlexEnd,
+        SpaceBetween = (byte)YogaJustify.SpaceBetween,
+        SpaceAround = (byte)YogaJustify.SpaceAround,
+        SpaceEvenly = (byte)YogaJustify.SpaceEvenly,
     }
 }

@@ -1,10 +1,10 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGDisplay : uint
+    public enum YogaDisplay : uint
     {
-        YGDisplayFlex,
-        YGDisplayNone,
-        YGDisplayContents,
+        Flex,
+        None,
+        Contents,
     }
 }

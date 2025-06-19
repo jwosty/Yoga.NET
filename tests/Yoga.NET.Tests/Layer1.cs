@@ -20,7 +20,7 @@ public unsafe class Layer1
         AssertExt.NotNull(rootPtr);
         yoga.YGNodeStyleSetWidth(rootPtr, 42);
         yoga.YGNodeStyleSetHeight(rootPtr, 84);
-        yoga.YGNodeCalculateLayout(rootPtr, yoga.YGUndefined, yoga.YGUndefined, YGDirection.YGDirectionLTR);
+        yoga.YGNodeCalculateLayout(rootPtr, yoga.YGUndefined, yoga.YGUndefined, YogaDirection.LTR);
         var width = yoga.YGNodeLayoutGetWidth(rootPtr);
         var height = yoga.YGNodeLayoutGetHeight(rootPtr);
         Assert.Equal(42, width);
@@ -33,14 +33,14 @@ public unsafe class Layer1
     {
         var rootPtr = yoga.YGNodeNew();
         AssertExt.NotNull(rootPtr);
-        yoga.YGNodeStyleSetFlexDirection(rootPtr, YGFlexDirection.YGFlexDirectionRow);
+        yoga.YGNodeStyleSetFlexDirection(rootPtr, YogaFlexDirection.Row);
         yoga.YGNodeStyleSetWidth(rootPtr, 200);
         yoga.YGNodeStyleSetHeight(rootPtr, 100);
 
         var child0Ptr = yoga.YGNodeNew();
         AssertExt.NotNull(child0Ptr);
         yoga.YGNodeStyleSetFlexGrow(child0Ptr, 1);
-        yoga.YGNodeStyleSetMargin(child0Ptr, YGEdge.YGEdgeRight, 10);
+        yoga.YGNodeStyleSetMargin(child0Ptr, YogaEdge.Right, 10);
         yoga.YGNodeInsertChild(rootPtr, child0Ptr, 0);
 
         var child1Ptr = yoga.YGNodeNew();
@@ -48,7 +48,7 @@ public unsafe class Layer1
         yoga.YGNodeStyleSetFlexGrow(child1Ptr, 1);
         yoga.YGNodeInsertChild(rootPtr, child1Ptr, 1);
 
-        yoga.YGNodeCalculateLayout(rootPtr, yoga.YGUndefined, yoga.YGUndefined, YGDirection.YGDirectionLTR);
+        yoga.YGNodeCalculateLayout(rootPtr, yoga.YGUndefined, yoga.YGUndefined, YogaDirection.LTR);
 
         var rootLeft = yoga.YGNodeLayoutGetLeft(rootPtr);
         var rootRight = yoga.YGNodeLayoutGetRight(rootPtr);

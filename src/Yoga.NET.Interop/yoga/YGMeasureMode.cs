@@ -1,10 +1,10 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGMeasureMode : uint
+    public enum YogaMeasureMode : uint
     {
-        YGMeasureModeUndefined,
-        YGMeasureModeExactly,
-        YGMeasureModeAtMost,
+        Undefined,
+        Exactly,
+        AtMost,
     }
 }

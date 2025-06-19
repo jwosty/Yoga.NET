@@ -1,10 +1,10 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGWrap : uint
+    public enum YogaWrap : uint
     {
-        YGWrapNoWrap,
-        YGWrapWrap,
-        YGWrapWrapReverse,
+        NoWrap,
+        Wrap,
+        WrapReverse,
     }
 }

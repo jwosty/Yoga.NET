@@ -1,13 +1,13 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGLogLevel : uint
+    public enum YogaLogLevel : uint
     {
-        YGLogLevelError,
-        YGLogLevelWarn,
-        YGLogLevelInfo,
-        YGLogLevelDebug,
-        YGLogLevelVerbose,
-        YGLogLevelFatal,
+        Error,
+        Warn,
+        Info,
+        Debug,
+        Verbose,
+        Fatal,
     }
 }

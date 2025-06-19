@@ -58,7 +58,7 @@ generate_bindings() {
   dotnet ClangSharpPInvokeGenerator \
     --language c++ \
     --std c++20 \
-    --config latest-codegen unix-types generate-helper-types multi-file exclude-funcs-with-body generate-native-bitfield-attribute generate-tests-xunit \
+    --config latest-codegen unix-types generate-helper-types multi-file exclude-funcs-with-body exclude-using-statics-for-enums generate-native-bitfield-attribute generate-tests-xunit strip-enum-member-type-name \
     --output "${OUTPUT_DIR}" \
     --test-output "${TEST_OUTPUT_DIR}" \
     --namespace "Yoga.NET.Interop" \
@@ -74,14 +74,32 @@ generate_bindings() {
     --exclude "facebook::yoga::LayoutResults" \
     --exclude "facebook::yoga::calculateFlexLine" \
     --exclude "facebook::yoga::Event" \
+  --file-directory "${HEADERS_DIR}" \
+  --libraryPath "libyoga" \
     "$@";
+#  --remap "YGAlign=Align" \
+#  --remap "YGBoxSizing=BoxSizing" \
+#  --remap "YGDimension=Dimension" \
+#  --remap "YGDirection=Direction" \
+#  --remap "YGDisplay=Display" \
+#  --remap "YGEdge=Edge" \
+#  --remap "YGErrata=Errata" \
+#  --remap "YGExperimentalFeature=ExperimentalFeature" \
+#  --remap "YGFlexDirection=FlexDirection" \
+#  --remap "YGGutter=Gutter" \
+#  --remap "YGJustify=Justify" \
+#  --remap "YGLogLevel=LogLevel" \
+#  --remap "YGMeasureMode=MeasureMode" \
+#  --remap "YGNodeType=NodeType" \
+#  --remap "YGPosition=Position" \
+#  --remap "YGUnit=Unit" \
+#  --remap "YGWrap=Wrap" \
+#  --remap "YGOverflow=Overflow" \
 }
 
 echo "Generating bindings..."
 
 generate_bindings \
-  --file-directory "${HEADERS_DIR}" \
-  --libraryPath "libyoga" \
   --file "yoga/YGConfig.h" \
   --file "yoga/YGEnums.h" \
   --file "yoga/YGMacros.h" \

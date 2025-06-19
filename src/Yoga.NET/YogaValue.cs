@@ -47,7 +47,7 @@ public struct YogaValue : IEquatable<YogaValue>
 
     public static YogaValue Percent(float value) => new YogaValue(value, float.IsNaN(value) ? YogaUnit.Undefined : YogaUnit.Percent);
 
-    public static implicit operator YGValue(YogaValue ygValue) => new YGValue { value = ygValue.Value, unit = (YGUnit)ygValue.Unit };
-    public static implicit operator YogaValue(YGValue ygValue) => new YogaValue(ygValue.value, (YogaUnit)ygValue.unit);
+    public static implicit operator YGValue(YogaValue ygValue) => new YGValue { value = ygValue.Value, unit = ygValue.Unit };
+    public static implicit operator YogaValue(YGValue ygValue) => new YogaValue(ygValue.value, ygValue.unit);
     public static implicit operator YogaValue(float pointValue) => YogaValue.Point(pointValue);
 }

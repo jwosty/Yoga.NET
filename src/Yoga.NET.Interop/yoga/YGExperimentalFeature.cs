@@ -1,8 +1,8 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGExperimentalFeature : uint
+    public enum YogaExperimentalFeature : uint
     {
-        YGExperimentalFeatureWebFlexBasis,
+        WebFlexBasis,
     }
 }

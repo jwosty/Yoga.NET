@@ -1,15 +1,13 @@
-using static Yoga.NET.Interop.YGLogLevel;
-
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("uint8_t")]
     public enum LogLevel : byte
     {
-        Error = (byte)YGLogLevelError,
-        Warn = (byte)YGLogLevelWarn,
-        Info = (byte)YGLogLevelInfo,
-        Debug = (byte)YGLogLevelDebug,
-        Verbose = (byte)YGLogLevelVerbose,
-        Fatal = (byte)YGLogLevelFatal,
+        Error = (byte)YogaLogLevel.Error,
+        Warn = (byte)YogaLogLevel.Warn,
+        Info = (byte)YogaLogLevel.Info,
+        Debug = (byte)YogaLogLevel.Debug,
+        Verbose = (byte)YogaLogLevel.Verbose,
+        Fatal = (byte)YogaLogLevel.Fatal,
     }
 }

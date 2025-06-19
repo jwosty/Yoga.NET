@@ -1,16 +1,16 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGAlign : uint
+    public enum YogaAlign : uint
     {
-        YGAlignAuto,
-        YGAlignFlexStart,
-        YGAlignCenter,
-        YGAlignFlexEnd,
-        YGAlignStretch,
-        YGAlignBaseline,
-        YGAlignSpaceBetween,
-        YGAlignSpaceAround,
-        YGAlignSpaceEvenly,
+        Auto,
+        FlexStart,
+        Center,
+        FlexEnd,
+        Stretch,
+        Baseline,
+        SpaceBetween,
+        SpaceAround,
+        SpaceEvenly,
     }
 }

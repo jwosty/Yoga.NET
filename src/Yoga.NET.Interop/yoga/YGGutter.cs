@@ -1,10 +1,10 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGGutter : uint
+    public enum YogaGutter : uint
     {
-        YGGutterColumn,
-        YGGutterRow,
-        YGGutterAll,
+        Column,
+        Row,
+        All,
     }
 }

@@ -1,15 +1,13 @@
-using static Yoga.NET.Interop.YGErrata;
-
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("uint32_t")]
     public enum Errata : uint
     {
-        None = (uint)YGErrataNone,
-        StretchFlexBasis = (uint)YGErrataStretchFlexBasis,
-        AbsolutePositionWithoutInsetsExcludesPadding = (uint)YGErrataAbsolutePositionWithoutInsetsExcludesPadding,
-        AbsolutePercentAgainstInnerSize = (uint)YGErrataAbsolutePercentAgainstInnerSize,
-        All = (uint)YGErrataAll,
-        Classic = (uint)YGErrataClassic,
+        None = (uint)YogaErrata.None,
+        StretchFlexBasis = (uint)YogaErrata.StretchFlexBasis,
+        AbsolutePositionWithoutInsetsExcludesPadding = (uint)YogaErrata.AbsolutePositionWithoutInsetsExcludesPadding,
+        AbsolutePercentAgainstInnerSize = (uint)YogaErrata.AbsolutePercentAgainstInnerSize,
+        All = (uint)YogaErrata.All,
+        Classic = (uint)YogaErrata.Classic,
     }
 }

@@ -1,9 +1,9 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGBoxSizing : uint
+    public enum YogaBoxSizing : uint
     {
-        YGBoxSizingBorderBox,
-        YGBoxSizingContentBox,
+        BorderBox,
+        ContentBox,
     }
 }

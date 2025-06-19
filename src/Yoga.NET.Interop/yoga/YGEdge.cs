@@ -1,16 +1,16 @@
 namespace Yoga.NET.Interop
 {
     [NativeTypeName("unsigned int")]
-    public enum YGEdge : uint
+    public enum YogaEdge : uint
     {
-        YGEdgeLeft,
-        YGEdgeTop,
-        YGEdgeRight,
-        YGEdgeBottom,
-        YGEdgeStart,
-        YGEdgeEnd,
-        YGEdgeHorizontal,
-        YGEdgeVertical,
-        YGEdgeAll,
+        Left,
+        Top,
+        Right,
+        Bottom,
+        Start,
+        End,
+        Horizontal,
+        Vertical,
+        All,
     }
 }
