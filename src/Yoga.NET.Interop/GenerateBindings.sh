@@ -62,6 +62,7 @@ generate_bindings() {
     --output "${OUTPUT_DIR}" \
     --test-output "${TEST_OUTPUT_DIR}" \
     --namespace "Yoga.NET.Interop" \
+    --methodClassName "yoga" \
     --additional "-isysroot" "${SDK_PATH}" \
     --additional "-stdlib=libc++" \
     --additional "-isystem" "${SDK_PATH}/usr/include/c++/v1" \

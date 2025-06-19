@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Yoga.NET.Interop
 {
-    public static unsafe partial class Methods
+    public static unsafe partial class yoga
     {
         [DllImport("libyoga", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("YGConfigRef")]
