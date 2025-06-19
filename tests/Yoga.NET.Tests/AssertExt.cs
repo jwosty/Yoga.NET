@@ -1,3 +1,5 @@
+using System;
+
 namespace Yoga.NET.Tests;
 
 public static unsafe class AssertExt

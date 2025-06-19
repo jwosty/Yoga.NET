@@ -1,4 +1,6 @@
 // ReSharper disable InconsistentNaming
+using System;
+
 namespace Yoga.NET.Interop;
 
 /// <summary>

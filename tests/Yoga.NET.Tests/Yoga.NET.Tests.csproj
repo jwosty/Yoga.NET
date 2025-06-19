@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
@@ -24,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Yoga.NET.Interop\Yoga.NET.Interop.csproj" />
+    <ProjectReference Include="..\..\src\Yoga.NET\Yoga.NET.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$([System.OperatingSystem]::IsMacOS()) And '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'arm64'">
     <Content Include="..\..\cmake-build-debug\src\yoga\libyoga.dylib">

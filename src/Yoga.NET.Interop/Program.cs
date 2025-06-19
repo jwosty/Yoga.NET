@@ -1,4 +1,6 @@
-﻿namespace Yoga.NET.Interop;
+﻿using System;
+
+namespace Yoga.NET.Interop;
 
 static class Program
 {

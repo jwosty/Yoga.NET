@@ -3,10 +3,10 @@ using Yoga.NET.Interop;
 
 namespace Yoga.NET.Tests;
 
-public unsafe class Layer0
+public unsafe class Layer1
 {
     [Fact]
-    public void YGNodeConstructionFreeing()
+    public void YGNodeNewFree()
     {
         var rootPtr = yoga.YGNodeNew();
         AssertExt.NotNull(rootPtr);
