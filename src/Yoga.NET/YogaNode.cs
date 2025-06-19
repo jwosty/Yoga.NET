@@ -11,13 +11,20 @@ public unsafe class YogaNode : IDisposable
 
     public YGNode* Handle { get; }
 
+    private YogaConfig _config;
+
     public YogaNode()
     {
         this.Handle = yoga.YGNodeNew();
         if (this.Handle is null)
         {
-            throw new InvalidOperationException("Failed to allocate native memory");
+            throw new InvalidOperationException("Failed to allocate native YGNode object");
         }
+    }
+
+    public YogaNode(YogaConfig config)
+    {
+        this.Handle = yoga.YGNodeNewWithConfig(config.Handle);
     }
 
     public void CalculateLayout(float availableWidth = yoga.YGUndefined, float availableHeight = yoga.YGUndefined, YGDirection? ownerDirection = null)
@@ -48,6 +55,11 @@ public unsafe class YogaNode : IDisposable
         GC.SuppressFinalize(this);
     }
 
+    ~YogaNode()
+    {
+        this.Dispose(false);
+    }
+
     #region YGNode
 
     public void InsertChild(int index, YogaNode child) =>
@@ -56,6 +68,16 @@ public unsafe class YogaNode : IDisposable
     public void RemoveChild(YogaNode child) => yoga.YGNodeRemoveChild(this.Handle, child.Handle);
 
     public void Clear() => yoga.YGNodeRemoveAllChildren(this.Handle);
+
+    public YogaConfig Config
+    {
+        get => this._config;
+        set
+        {
+            using var oldConfig = this._config;
+            this._config = value;
+        }
+    }
 
     #endregion
 
