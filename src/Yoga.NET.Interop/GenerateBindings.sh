@@ -80,7 +80,7 @@ echo "Generating bindings..."
 
 generate_bindings \
   --file-directory "${HEADERS_DIR}" \
-  --libraryPath "libyoga.dylib" \
+  --libraryPath "libyoga" \
   --file "yoga/YGConfig.h" \
   --file "yoga/YGEnums.h" \
   --file "yoga/YGMacros.h" \

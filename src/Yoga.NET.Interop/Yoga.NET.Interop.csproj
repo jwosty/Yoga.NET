@@ -17,6 +17,7 @@
     <None Remove="Native\jackdotnet.h" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
     <PackageReference Include="libclang" Version="20.1.2" />
     <!-- Runtime package should be automatically included by the libclang/libclangsharp meta-packages, but for some
     reason, on my mac, it's not, so just do it manually -->
