@@ -48,7 +48,132 @@ public unsafe class YogaNode : IDisposable
         GC.SuppressFinalize(this);
     }
 
+    #region YGNode
+
+    public void InsertChild(int index, YogaNode child) =>
+        yoga.YGNodeInsertChild(this.Handle, child.Handle, (nuint)index);
+
+    public void RemoveChild(YogaNode child) => yoga.YGNodeRemoveChild(this.Handle, child.Handle);
+
+    public void Clear() => yoga.YGNodeRemoveAllChildren(this.Handle);
+
+    #endregion
+
     #region Style
+
+    public YGDirection Direction
+    {
+        get => yoga.YGNodeStyleGetDirection(this.Handle);
+        set =>  yoga.YGNodeStyleSetDirection(this.Handle, value);
+    }
+
+    public FlexDirection FlexDirection
+    {
+        get => (FlexDirection)yoga.YGNodeStyleGetFlexDirection(this.Handle);
+        set => yoga.YGNodeStyleSetFlexDirection(this.Handle, (YGFlexDirection)value);
+    }
+
+    public float FlexGrow
+    {
+        get => yoga.YGNodeStyleGetFlexGrow(this.Handle);
+        set => yoga.YGNodeStyleSetFlexGrow(this.Handle, value);
+    }
+
+    public float FlexShrink
+    {
+        get => yoga.YGNodeStyleGetFlexShrink(this.Handle);
+        set => yoga.YGNodeStyleSetFlexShrink(this.Handle, value);
+    }
+
+    public YogaValue FlexBasis
+    {
+        get => yoga.YGNodeStyleGetFlexBasis(this.Handle);
+        set
+        {
+            switch (value.Unit)
+            {
+                case YogaUnit.Percent:
+                    yoga.YGNodeStyleSetFlexBasisPercent(this.Handle, value.Value);
+                    break;
+                case YogaUnit.Auto:
+                    yoga.YGNodeStyleSetFlexBasisAuto(this.Handle);
+                    break;
+                default:
+                    yoga.YGNodeStyleSetFlex(this.Handle, value.Value);
+                    break;
+            }
+        }
+    }
+
+    public YogaValue MarginLeft
+    {
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeLeft);
+        set => this.SetStyleMargin(YGEdge.YGEdgeLeft, value);
+    }
+
+    public YogaValue MarginTop
+    {
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeTop);
+        set => this.SetStyleMargin(YGEdge.YGEdgeTop, value);
+    }
+
+    public YogaValue MarginRight
+    {
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeRight);
+        set => this.SetStyleMargin(YGEdge.YGEdgeRight, value);
+    }
+
+    public YogaValue MarginBottom
+    {
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeBottom);
+        set => this.SetStyleMargin(YGEdge.YGEdgeBottom, value);
+    }
+
+    public YogaValue MarginStart
+    {
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeStart);
+        set => this.SetStyleMargin(YGEdge.YGEdgeStart, value);
+    }
+
+    public YogaValue MarginEnd
+    {
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeEnd);
+        set => this.SetStyleMargin(YGEdge.YGEdgeEnd, value);
+    }
+
+    public YogaValue MarginHorizontal
+    {
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeHorizontal);
+        set => this.SetStyleMargin(YGEdge.YGEdgeHorizontal, value);
+    }
+
+    public YogaValue MarginVertical
+    {
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeVertical);
+        set => this.SetStyleMargin(YGEdge.YGEdgeVertical, value);
+    }
+
+    public YogaValue Margin
+    {
+        get => yoga.YGNodeStyleGetMargin(this.Handle, YGEdge.YGEdgeAll);
+        set => this.SetStyleMargin(YGEdge.YGEdgeAll, value);
+    }
+
+    private void SetStyleMargin(YGEdge edge, YogaValue value)
+    {
+        switch (value.Unit)
+        {
+            case YogaUnit.Percent:
+                yoga.YGNodeStyleSetMarginPercent(this.Handle, edge, value.Value);
+                break;
+            case YogaUnit.Auto:
+                yoga.YGNodeStyleSetMarginAuto(this.Handle, edge);
+                break;
+            default:
+                yoga.YGNodeStyleSetMargin(this.Handle, edge, value.Value);
+                break;
+        }
+    }
 
     public YogaValue Width
     {

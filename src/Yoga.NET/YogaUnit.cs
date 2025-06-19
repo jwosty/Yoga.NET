@@ -1,7 +1,9 @@
+using JetBrains.Annotations;
 using Yoga.NET.Interop;
 
 namespace Yoga.NET;
 
+[PublicAPI]
 public enum YogaUnit : uint
 {
     Undefined = YGUnit.YGUnitUndefined,
