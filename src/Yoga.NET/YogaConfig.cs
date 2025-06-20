@@ -90,4 +90,54 @@ public unsafe class YogaConfig : IDisposable
         set => yoga.YGConfigSetPointScaleFactor(this.Handle, value);
     }
 
+    /// <summary>
+    /// <para>Configures how Yoga balances W3C conformance vs compatibility with layouts
+    /// created against earlier versions of Yoga.
+    /// </para>
+    /// </summary>
+    ///
+    /// <remarks>
+    /// <para>By default Yoga will prioritize W3C conformance. <see cref="Errata"/> may be set to ask
+    /// Yoga to produce specific incorrect behaviors. See example.
+    /// </para>
+    ///
+    /// <para>
+    /// YogaErrata is a bitmask, and multiple errata may be set at once. Predefined
+    /// constants exist for convenience:
+    /// <list type="number">
+    /// <item>YogaErrataNone: No errata</item>
+    /// <item>YogaErrataClassic: Match layout behaviors of Yoga 1.x</item>
+    /// <item>YogaErrataAll: Match layout behaviors of Yoga 1.x, including <c>UseLegacyStretchBehaviour</c></item>
+    /// </list>
+    /// </para>
+    /// </remarks>
+    ///
+    /// <example>
+    /// Asking Yoga to produce a specific incorrect behavior:
+    /// <code>YGConfigSetErrata(config, YogaErrataStretchFlexBasis)</code>
+    /// </example>
+    public YogaErrata Errata
+    {
+        get => yoga.YGConfigGetErrata(this.Handle);
+        set  => yoga.YGConfigSetErrata(this.Handle, value);
+    }
+
+    // TODO: add logger functionality. This is going to be tricky, especially because of the va_list bit... We will
+    // probably have to write some helpers on the C++ side to make it easier / more reliably cross-platform
+
+    /// <summary>
+    /// Enable or disable an experimental/unsupported feature in Yoga.
+    /// </summary>
+    /// <param name="feature">The feature to enable or disable.</param>
+    /// <param name="enabled"></param>
+    public void SetExperimentalFeatureEnabled(YogaExperimentalFeature feature, bool enabled) =>
+        yoga.YGConfigSetExperimentalFeatureEnabled(this.Handle, feature, (byte)(enabled ? 1 : 0));
+
+    /// <summary>
+    /// Whether an experimental feature is set.
+    /// </summary>
+    /// <param name="feature">The feature to check.</param>
+    /// <returns></returns>
+    public bool IsExperimentalFeatureEnabled(YogaExperimentalFeature feature) =>
+        yoga.YGConfigIsExperimentalFeatureEnabled(this.Handle, feature) != 0;
 }
