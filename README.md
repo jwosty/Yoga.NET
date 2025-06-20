@@ -8,7 +8,7 @@ To build the native library (after cloning the repository and the submodules):
 
 ```bash
 # Optionally add `-G Ninja` to use the Ninja build system
-cmake -DCMAKE_BUILD_TYPE=Release -S ../ -B build
+cmake -DCMAKE_BUILD_TYPE=Release -S . -B build
 cmake --build build
 ```
 
