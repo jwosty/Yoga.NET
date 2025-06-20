@@ -13,22 +13,24 @@ namespace Yoga.NET;
 public unsafe class YogaConfig : IDisposable
 {
     private bool _disposed;
+    private bool _ownsHandle;
 
     public YGConfig* Handle { get; }
+
+    public YogaConfig(YGConfig* configHandle, bool ownsHandle = true)
+    {
+        if (configHandle is null)
+        {
+            throw new ArgumentNullException(nameof(configHandle), $"Native {nameof(YGConfig)} instance handle cannot be null.");
+        }
+        this.Handle = configHandle;
+        this._ownsHandle = ownsHandle;
+    }
 
     /// <summary>
     /// Creates a default set of configuration options.
     /// </summary>
-    /// <param name="handle"></param>
-    /// <exception cref="InvalidOperationException">Thrown if the native object allocation fails.</exception>
-    public YogaConfig()
-    {
-        this.Handle = yoga.YGConfigNew();
-        if (this.Handle is null)
-        {
-            throw new InvalidOperationException("Failed to allocate native YGConfig object");
-        }
-    }
+    public YogaConfig() : this(yoga.YGConfigNew()) { }
 
     public void Dispose(bool disposing)
     {
@@ -40,7 +42,10 @@ public unsafe class YogaConfig : IDisposable
             }
 
             // Free unmanaged resources.
-            yoga.YGConfigFree(this.Handle);
+            if (this._ownsHandle)
+            {
+                yoga.YGConfigFree(this.Handle);
+            }
 
             this._disposed = true;
         }
@@ -56,6 +61,8 @@ public unsafe class YogaConfig : IDisposable
     {
         this.Dispose(false);
     }
+
+    public static YogaConfig Default => new YogaConfig(yoga.YGConfigGetDefault(), false);
 
     /// <summary>
     /// Yoga by default creates new nodes with style defaults different from flexbox
@@ -82,5 +89,5 @@ public unsafe class YogaConfig : IDisposable
         get => yoga.YGConfigGetPointScaleFactor(this.Handle);
         set => yoga.YGConfigSetPointScaleFactor(this.Handle, value);
     }
-    
+
 }

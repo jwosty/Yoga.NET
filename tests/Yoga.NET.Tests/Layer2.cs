@@ -1,3 +1,4 @@
+using System;
 using Yoga.NET.Interop;
 
 namespace Yoga.NET.Tests;
@@ -56,5 +57,48 @@ public class Layer2
         Assert.Equal(0, child1.LayoutRight);
         Assert.Equal(95, child1.LayoutWidth);
         Assert.Equal(100, child1.LayoutHeight);
+    }
+
+    /// Ensures that sharing a config between various nodes doesn't free it
+    [Fact]
+    public void SharedConfigNonFreeing()
+    {
+        var config = new YogaConfig();
+
+        config.PointScaleFactor = 42.0f;
+
+        for (var i = 0; i < 10; i++)
+        {
+            using var node = new YogaNode(config);
+        }
+
+        // if the config object was freed, this should stomp all over its memory to really make sure our later check
+        // catches a problem
+        for (var i = 0; i < 100; i++)
+        {
+            using var node = new YogaNode();
+        }
+
+        GC.Collect();
+
+        Assert.Equal(42.0f, config.PointScaleFactor);
+    }
+
+    [Fact]
+    public unsafe void GlobalConfigNonFreeing()
+    {
+        var defaultConfig = YogaConfig.Default;
+        var psf = defaultConfig.PointScaleFactor;
+        Assert.NotEqual(0.0f, psf);
+
+        for (int i = 0; i < 100; i++)
+        {
+            using var node = new YogaNode();
+            Assert.Equal((nint)defaultConfig.Handle, (nint)node.Config.Handle);
+        }
+
+        GC.Collect();
+
+        Assert.Equal(psf, defaultConfig.PointScaleFactor);
     }
 }

@@ -11,7 +11,7 @@ public unsafe class YogaNode : IDisposable
 
     public YGNode* Handle { get; }
 
-    private YogaConfig _config;
+    private YogaConfig? _config;
 
     public YogaNode()
     {
@@ -25,6 +25,7 @@ public unsafe class YogaNode : IDisposable
     public YogaNode(YogaConfig config)
     {
         this.Handle = yoga.YGNodeNewWithConfig(config.Handle);
+        this._config = config;
     }
 
     public void CalculateLayout(float availableWidth = yoga.YGUndefined, float availableHeight = yoga.YGUndefined, YogaDirection? ownerDirection = null)
@@ -71,12 +72,8 @@ public unsafe class YogaNode : IDisposable
 
     public YogaConfig Config
     {
-        get => this._config;
-        set
-        {
-            using var oldConfig = this._config;
-            this._config = value;
-        }
+        get => this._config ??= new YogaConfig(yoga.YGNodeGetConfig(this.Handle), false);
+        set => this._config = value;
     }
 
     #endregion
@@ -101,6 +98,47 @@ public unsafe class YogaNode : IDisposable
         set => yoga.YGNodeStyleSetJustifyContent(this.Handle, value);
     }
 
+    public YogaAlign AlignContent
+    {
+        get => yoga.YGNodeStyleGetAlignContent(this.Handle);
+        set => yoga.YGNodeStyleSetAlignContent(this.Handle, value);
+    }
+
+    public YogaAlign AlignItems
+    {
+        get => yoga.YGNodeStyleGetAlignItems(this.Handle);
+        set => yoga.YGNodeStyleSetAlignItems(this.Handle, value);
+    }
+
+    public YogaAlign AlignSelf
+    {
+        get => yoga.YGNodeStyleGetAlignSelf(this.Handle);
+        set  => yoga.YGNodeStyleSetAlignSelf(this.Handle, value);
+    }
+
+    public YogaPositionType PositionType
+    {
+        get => yoga.YGNodeStyleGetPositionType(this.Handle);
+        set => yoga.YGNodeStyleSetPositionType(this.Handle, value);
+    }
+
+    public YogaWrap FlexWrap
+    {
+        get => yoga.YGNodeStyleGetFlexWrap(this.Handle);
+        set => yoga.YGNodeStyleSetFlexWrap(this.Handle, value);
+    }
+
+    public YogaOverflow Overflow
+    {
+        get => yoga.YGNodeStyleGetOverflow(this.Handle);
+        set => yoga.YGNodeStyleSetOverflow(this.Handle, value);
+    }
+
+    public YogaDisplay Display
+    {
+        get => yoga.YGNodeStyleGetDisplay(this.Handle);
+        set => yoga.YGNodeStyleSetDisplay(this.Handle, value);
+    }
 
     public float FlexGrow
     {
@@ -128,11 +166,123 @@ public unsafe class YogaNode : IDisposable
                     yoga.YGNodeStyleSetFlexBasisAuto(this.Handle);
                     break;
                 default:
-                    yoga.YGNodeStyleSetFlex(this.Handle, value.Value);
+                    yoga.YGNodeStyleSetFlexBasis(this.Handle, value.Value);
                     break;
             }
         }
     }
+
+    #region Position
+
+    public YogaValue Left
+    {
+        get => yoga.YGNodeStyleGetPosition(this.Handle, YogaEdge.Left);
+        set
+        {
+            var edge = YogaEdge.Left;
+            this.SetStylePosition(value, edge);
+        }
+    }
+
+    public YogaValue Top
+    {
+        get => yoga.YGNodeStyleGetPosition(this.Handle, YogaEdge.Top);
+        set
+        {
+            var edge = YogaEdge.Top;
+            this.SetStylePosition(value, edge);
+        }
+    }
+
+    public YogaValue Right
+    {
+        get => yoga.YGNodeStyleGetPosition(this.Handle, YogaEdge.Right);
+        set
+        {
+            var edge = YogaEdge.Right;
+            this.SetStylePosition(value, edge);
+        }
+    }
+
+    public YogaValue Bottom
+    {
+        get => yoga.YGNodeStyleGetPosition(this.Handle, YogaEdge.Bottom);
+        set
+        {
+            var edge = YogaEdge.Bottom;
+            this.SetStylePosition(value, edge);
+        }
+    }
+
+    public YogaValue Start
+    {
+        get => yoga.YGNodeStyleGetPosition(this.Handle, YogaEdge.Start);
+        set
+        {
+            var edge = YogaEdge.Start;
+            this.SetStylePosition(value, edge);
+        }
+    }
+
+    public YogaValue End
+    {
+        get => yoga.YGNodeStyleGetPosition(this.Handle, YogaEdge.End);
+        set
+        {
+            var edge = YogaEdge.End;
+            this.SetStylePosition(value, edge);
+        }
+    }
+
+    public YogaValue Horizontal
+    {
+        get => yoga.YGNodeStyleGetPosition(this.Handle, YogaEdge.Horizontal);
+        set
+        {
+            var edge = YogaEdge.Horizontal;
+            this.SetStylePosition(value, edge);
+        }
+    }
+
+    public YogaValue Vertical
+    {
+        get => yoga.YGNodeStyleGetPosition(this.Handle, YogaEdge.Vertical);
+        set
+        {
+            var edge = YogaEdge.Vertical;
+            this.SetStylePosition(value, edge);
+        }
+    }
+
+    public YogaValue PositionAll
+    {
+        get => yoga.YGNodeStyleGetPosition(this.Handle, YogaEdge.All);
+        set
+        {
+            var edge = YogaEdge.All;
+            this.SetStylePosition(value, edge);
+        }
+    }
+
+    private void SetStylePosition(YogaValue value, YogaEdge edge)
+    {
+        switch (value.Unit)
+        {
+            case YogaUnit.Percent:
+                yoga.YGNodeStyleSetPositionPercent(this.Handle, edge, value.Value);
+                break;
+            case YogaUnit.Auto:
+                yoga.YGNodeStyleSetPositionAuto(this.Handle, edge);
+                break;
+            default:
+                yoga.YGNodeStyleSetPosition(this.Handle, edge, value.Value);
+                break;
+        }
+    }
+
+    #endregion
+
+    #region Margin
 
     public YogaValue MarginLeft
     {
@@ -204,6 +354,179 @@ public unsafe class YogaNode : IDisposable
         }
     }
 
+    #endregion
+
+    #region Padding
+
+    public YogaValue PaddingLeft
+    {
+        get => yoga.YGNodeStyleGetPadding(this.Handle, YogaEdge.Left);
+        set => this.SetStylePadding(YogaEdge.Left, value);
+    }
+
+    public YogaValue PaddingTop
+    {
+        get => yoga.YGNodeStyleGetPadding(this.Handle, YogaEdge.Top);
+        set => this.SetStylePadding(YogaEdge.Top, value);
+    }
+
+    public YogaValue PaddingRight
+    {
+        get => yoga.YGNodeStyleGetPadding(this.Handle, YogaEdge.Right);
+        set => this.SetStylePadding(YogaEdge.Right, value);
+    }
+
+    public YogaValue PaddingBottom
+    {
+        get => yoga.YGNodeStyleGetPadding(this.Handle, YogaEdge.Bottom);
+        set => this.SetStylePadding(YogaEdge.Bottom, value);
+    }
+
+    public YogaValue PaddingStart
+    {
+        get => yoga.YGNodeStyleGetPadding(this.Handle, YogaEdge.Start);
+        set => this.SetStylePadding(YogaEdge.Start, value);
+    }
+
+    public YogaValue PaddingEnd
+    {
+        get => yoga.YGNodeStyleGetPadding(this.Handle, YogaEdge.End);
+        set => this.SetStylePadding(YogaEdge.End, value);
+    }
+
+    public YogaValue PaddingHorizontal
+    {
+        get => yoga.YGNodeStyleGetPadding(this.Handle, YogaEdge.Horizontal);
+        set => this.SetStylePadding(YogaEdge.Horizontal, value);
+    }
+
+    public YogaValue PaddingVertical
+    {
+        get => yoga.YGNodeStyleGetPadding(this.Handle, YogaEdge.Vertical);
+        set => this.SetStylePadding(YogaEdge.Vertical, value);
+    }
+
+    public YogaValue Padding
+    {
+        get => yoga.YGNodeStyleGetPadding(this.Handle, YogaEdge.All);
+        set => this.SetStylePadding(YogaEdge.All, value);
+    }
+
+    private void SetStylePadding(YogaEdge edge, YogaValue value)
+    {
+        switch (value.Unit)
+        {
+            case YogaUnit.Percent:
+                yoga.YGNodeStyleSetPaddingPercent(this.Handle, edge, value.Value);
+                break;
+            // Yoga does not support `auto` padding
+            default:
+                yoga.YGNodeStyleSetPadding(this.Handle, edge, value.Value);
+                break;
+        }
+    }
+
+    #endregion
+
+    #region Border
+    public YogaValue BorderLeft
+    {
+        get => yoga.YGNodeStyleGetBorder(this.Handle, YogaEdge.Left);
+        set => yoga.YGNodeStyleSetBorder(this.Handle, YogaEdge.Left, value.Value);
+    }
+
+    public YogaValue BorderTop
+    {
+        get => yoga.YGNodeStyleGetBorder(this.Handle, YogaEdge.Top);
+        set => yoga.YGNodeStyleSetBorder(this.Handle, YogaEdge.Top, value.Value);
+    }
+
+    public YogaValue BorderRight
+    {
+        get => yoga.YGNodeStyleGetBorder(this.Handle, YogaEdge.Right);
+        set => yoga.YGNodeStyleSetBorder(this.Handle, YogaEdge.Right, value.Value);
+    }
+
+    public YogaValue BorderBottom
+    {
+        get => yoga.YGNodeStyleGetBorder(this.Handle, YogaEdge.Bottom);
+        set => yoga.YGNodeStyleSetBorder(this.Handle, YogaEdge.Bottom, value.Value);
+    }
+
+    public YogaValue BorderStart
+    {
+        get => yoga.YGNodeStyleGetBorder(this.Handle, YogaEdge.Start);
+        set => yoga.YGNodeStyleSetBorder(this.Handle, YogaEdge.Start, value.Value);
+    }
+
+    public YogaValue BorderEnd
+    {
+        get => yoga.YGNodeStyleGetBorder(this.Handle, YogaEdge.End);
+        set => yoga.YGNodeStyleSetBorder(this.Handle, YogaEdge.End, value.Value);
+    }
+
+    public YogaValue BorderHorizontal
+    {
+        get => yoga.YGNodeStyleGetBorder(this.Handle, YogaEdge.Horizontal);
+        set => yoga.YGNodeStyleSetBorder(this.Handle, YogaEdge.Horizontal, value.Value);
+    }
+
+    public YogaValue BorderVertical
+    {
+        get => yoga.YGNodeStyleGetBorder(this.Handle, YogaEdge.Vertical);
+        set => yoga.YGNodeStyleSetBorder(this.Handle, YogaEdge.Vertical, value.Value);
+    }
+
+    public YogaValue Border
+    {
+        get => yoga.YGNodeStyleGetBorder(this.Handle, YogaEdge.All);
+        set => yoga.YGNodeStyleSetBorder(this.Handle, YogaEdge.All, value.Value);
+    }
+
+    #endregion
+
+    #region Gap
+
+    public YogaValue GapColumn
+    {
+        get => yoga.YGNodeStyleGetGap(this.Handle, YogaGutter.Column);
+        set => this.SetStyleGap(YogaGutter.Column, value);
+    }
+
+    public YogaValue GapRow
+    {
+        get => yoga.YGNodeStyleGetGap(this.Handle, YogaGutter.Row);
+        set => this.SetStyleGap(YogaGutter.Row, value);
+    }
+
+    public YogaValue Gap
+    {
+        get => yoga.YGNodeStyleGetGap(this.Handle, YogaGutter.All);
+        set => this.SetStyleGap(YogaGutter.All, value);
+    }
+
+    private void SetStyleGap(YogaGutter gutter, YogaValue value)
+    {
+        switch (value.Unit)
+        {
+            case YogaUnit.Percent:
+                yoga.YGNodeStyleSetGapPercent(this.Handle, gutter, value.Value);
+                break;
+            // Yoga does not support `auto` gap
+            default:
+                yoga.YGNodeStyleSetGap(this.Handle, gutter, value.Value);
+                break;
+        }
+    }
+
+    #endregion
+
+    public YogaBoxSizing BoxSizing
+    {
+        get => yoga.YGNodeStyleGetBoxSizing(this.Handle);
+        set => yoga.YGNodeStyleSetBoxSizing(this.Handle, value);
+    }
+
     public YogaValue Width
     {
         get => yoga.YGNodeStyleGetWidth(this.Handle);
@@ -242,6 +565,36 @@ public unsafe class YogaNode : IDisposable
                     break;
             }
         }
+    }
+
+    public YogaValue MinWidth
+    {
+        get => yoga.YGNodeStyleGetMinWidth(this.Handle);
+        set  => yoga.YGNodeStyleSetMinWidth(this.Handle, value.Value);
+    }
+
+    public YogaValue MinHeight
+    {
+        get => yoga.YGNodeStyleGetMinHeight(this.Handle);
+        set => yoga.YGNodeStyleSetMinHeight(this.Handle, value.Value);
+    }
+
+    public YogaValue MaxWidth
+    {
+        get => yoga.YGNodeStyleGetMaxWidth(this.Handle);
+        set => yoga.YGNodeStyleSetMaxWidth(this.Handle, value.Value);
+    }
+
+    public YogaValue MaxHeight
+    {
+        get => yoga.YGNodeStyleGetMaxHeight(this.Handle);
+        set => yoga.YGNodeStyleSetMaxHeight(this.Handle, value.Value);
+    }
+
+    public float AspectRatio
+    {
+        get => yoga.YGNodeStyleGetAspectRatio(this.Handle);
+        set => yoga.YGNodeStyleSetAspectRatio(this.Handle, value);
     }
 
     #endregion
