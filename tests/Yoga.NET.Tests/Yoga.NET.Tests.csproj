@@ -26,7 +26,7 @@
     <ProjectReference Include="..\..\src\Yoga.NET\Yoga.NET.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$([System.OperatingSystem]::IsMacOS()) And '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'arm64'">
-    <Content Include="..\..\cmake-build-debug\src\yoga\libyoga.dylib">
+    <Content Include="..\..\build\src\yoga\libyoga.dylib">
       <Link>runtimes\osx-arm64\native\libyoga.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

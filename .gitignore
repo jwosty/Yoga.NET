@@ -421,3 +421,6 @@ tmp/
 
 # vcpkg
 vcpkg_installed/
+
+# cmake build dir
+build/
