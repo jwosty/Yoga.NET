@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <Platforms>x86;x64;arm64</Platforms>
     <OS Condition="$([System.OperatingSystem]::IsWindows())">win</OS>
     <OS Condition="$([System.OperatingSystem]::IsMacOS())">osx</OS>
     <OS Condition="$([System.OperatingSystem]::IsLinux())">linux</OS>

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using Yoga.NET.Interop;
 
@@ -11,21 +12,19 @@ public unsafe class YogaNode : IDisposable
 
     public YGNode* Handle { get; }
 
+    // Keep references to config and children to prevent their managed versions from getting GC'd inappropriately
     private YogaConfig? _config;
+    private List<YogaNode> _children;
 
-    public YogaNode()
+    public YogaNode(YogaConfig? config = null, int capacity = 0)
     {
-        this.Handle = yoga.YGNodeNew();
+        this.Handle = config is null ? yoga.YGNodeNew() : yoga.YGNodeNewWithConfig(config.Handle);
+        this._config = config;
+        this._children = new List<YogaNode>(capacity);
         if (this.Handle is null)
         {
             throw new InvalidOperationException("Failed to allocate native YGNode object");
         }
-    }
-
-    public YogaNode(YogaConfig config)
-    {
-        this.Handle = yoga.YGNodeNewWithConfig(config.Handle);
-        this._config = config;
     }
 
     public void CalculateLayout(float availableWidth = yoga.YGUndefined, float availableHeight = yoga.YGUndefined, YogaDirection? ownerDirection = null)
@@ -63,12 +62,25 @@ public unsafe class YogaNode : IDisposable
 
     #region YGNode
 
-    public void InsertChild(int index, YogaNode child) =>
+    public void InsertChild(int index, YogaNode child)
+    {
         yoga.YGNodeInsertChild(this.Handle, child.Handle, (nuint)index);
+        this._children.Insert(index, child);
+    }
 
-    public void RemoveChild(YogaNode child) => yoga.YGNodeRemoveChild(this.Handle, child.Handle);
+    public void RemoveChild(YogaNode child)
+    {
+        yoga.YGNodeRemoveChild(this.Handle, child.Handle);
+        this._children.Remove(child);
+    }
 
-    public void Clear() => yoga.YGNodeRemoveAllChildren(this.Handle);
+    public void Clear()
+    {
+        yoga.YGNodeRemoveAllChildren(this.Handle);
+        this._children.Clear();
+    }
+
+    public void AddChild(YogaNode child) => this.InsertChild(this._children.Count, child);
 
     public YogaConfig Config
     {
