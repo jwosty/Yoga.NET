@@ -16,28 +16,30 @@ public struct YogaValue : IEquatable<YogaValue>
         this.Unit = unit;
     }
 
+    // ReSharper disable CompareOfFloatsByEqualityOperator
     public bool Equals(YogaValue other)
     {
         if (this.Unit != other.Unit)
         {
             return false;
         }
-        return this.Value.Equals(other.Value) || this.Unit == YogaUnit.Undefined;
-    }
 
-    public override bool Equals(object? obj) => obj is not null && obj is YogaValue other && this.Equals(other);
+        return this.Unit switch
+        {
+            YogaUnit.Undefined or YogaUnit.Auto => true,
+            YogaUnit.Point or YogaUnit.Percent => this.Value == other.Value,
+            _ => false
+        };
+    }
+    // ReSharper restore CompareOfFloatsByEqualityOperator
+
+    public override bool Equals(object? obj) => obj is YogaValue other && this.Equals(other);
 
     public override int GetHashCode() => HashCode.Combine(this.Value, (int)this.Unit);
 
-    public static bool operator ==(YogaValue left, YogaValue right)
-    {
-        return left.Equals(right);
-    }
+    public static bool operator ==(YogaValue left, YogaValue right) => left.Equals(right);
 
-    public static bool operator !=(YogaValue left, YogaValue right)
-    {
-        return !left.Equals(right);
-    }
+    public static bool operator !=(YogaValue left, YogaValue right) => !left.Equals(right);
 
     public static YogaValue Point(float value) => new YogaValue(value, float.IsNaN(value) ? YogaUnit.Undefined : YogaUnit.Point);
 
