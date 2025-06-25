@@ -6,10 +6,19 @@ C# / .NET bindings for Yoga, Facebook's embeddable flexbox layout engine.
 
 To build the native library (after cloning the repository and the submodules):
 
+On macOS:
+
 ```bash
 # Optionally add `-G Ninja` to use the Ninja build system
 cmake -DCMAKE_BUILD_TYPE=Release -S . -B build
 cmake --build build
+```
+
+On Windows:
+
+```powershell
+cmake -DCMAKE_BUILD_TYPE=Release -S . -B build
+cmake --build build --config Release
 ```
 
 Then just build the C# project. For example, using the .NET CLI:

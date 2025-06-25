@@ -14,7 +14,7 @@ public static class Yoga
     private static bool _isInitialized = false;
 
     public const string PlaceholderAssemblyName = "libyoga";
-    public const string WindowsAssemblyName = "libyoga.dll";
+    public const string WindowsAssemblyName = "yoga.dll";
     public const string LinuxAssemblyName = "libyoga.so";
     // ReSharper disable once InconsistentNaming
     public const string MacOSAssemblyName = "libyoga.dylib";
