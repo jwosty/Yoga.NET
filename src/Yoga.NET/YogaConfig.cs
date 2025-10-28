@@ -10,7 +10,7 @@ namespace Yoga.NET;
 /// granularly per-node.
 /// </summary>
 [PublicAPI]
-public unsafe class YogaConfig : IDisposable
+public sealed unsafe class YogaConfig : IDisposable
 {
     private bool _disposed;
     private bool _ownsHandle;

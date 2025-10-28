@@ -6,7 +6,7 @@ using Yoga.NET.Interop;
 namespace Yoga.NET;
 
 [PublicAPI]
-public unsafe class YogaNode : IDisposable
+public sealed unsafe class YogaNode : IDisposable
 {
     private bool _disposed;
 
