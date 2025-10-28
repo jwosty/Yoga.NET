@@ -19,7 +19,16 @@ public static class Yoga
     // ReSharper disable once InconsistentNaming
     public const string MacOSAssemblyName = "libyoga.dylib";
 
-    [ModuleInitializer]
+    /// <summary>
+    /// Performs necessary native library initialization tasks. This should be called before any other library call.
+    /// </summary>
+    /// <remarks>
+    /// The simplest way to ensure proper initialization is to add a method like this into your application:
+    /// <code>
+    /// [ModuleInitializer]
+    /// public static void Initialize() => Yoga.NET.Interop.Yoga.Initialize();
+    /// </code>
+    /// </remarks>
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void Initialize()
     {
@@ -35,11 +44,8 @@ public static class Yoga
     {
         if (libraryName == PlaceholderAssemblyName)
         {
-            var asmDir = Path.GetDirectoryName(assembly.Location);
-            if (asmDir is null)
-            {
-                return IntPtr.Zero;
-            }
+            // Use AppContext.BaseDirectory (which works under NativeAOT) instead of assembly.Location (which does not)
+            var asmDir = AppContext.BaseDirectory;
             var rid = RuntimeInformation.RuntimeIdentifier;
             var osSpecificLibName = libraryName;
             if (OperatingSystem.IsWindows())
